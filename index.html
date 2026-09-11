@@ -520,9 +520,9 @@
             userKeys: [], 
             deposits: [], 
             bankInfo: {
-                bankName: 'MB Bank',
-                stk: '0987654321',
-                owner: 'NGUYEN VAN ADMIN'
+                bankName: 'ZALO PAY',
+                stk: '0909319453',
+                owner: 'TRAN NHAT KHANG'
             },
             telegram: {
                 token: '',
@@ -533,7 +533,7 @@
         let db = JSON.parse(localStorage.getItem('unbanFF_VioletDB_FullPro')) || defaultDB;
         // Đảm bảo tương thích nếu thiếu key bankInfo
         if(!db.bankInfo) {
-            db.bankInfo = { bankName: 'MB Bank', stk: '0987654321', owner: 'NGUYEN VAN ADMIN' };
+            db.bankInfo = { bankName: 'ZALO PAY', stk: '0909319453', owner: 'TRAN NHAT KHANG' };
         }
 
         function saveDB() {
