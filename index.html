@@ -14,7 +14,7 @@
             background: linear-gradient(135deg, #0f0c1b 0%, #1e1136 50%, #120926 100%); 
             color: #f3e8ff; 
             overflow-x: hidden;
-            padding-bottom: 75px; /* Tránh bị che bởi thanh menu di động dưới cùng */
+            padding-bottom: 75px; 
         }
         .glass { 
             background: rgba(45, 27, 84, 0.45); 
@@ -108,7 +108,7 @@
         </div>
     </nav>
 
-    <!-- THANH MENU ĐIỀU HƯỚNG DƯỚI ĐÁY DÀNH CHO ĐIỆN THOẠI (DỄ THẤY, DỄ BẤM - CÓ NÚT 3 GẠCH MENU DANH MỤC) -->
+    <!-- THANH MENU ĐIỀU HƯỚNG DƯỚI ĐÁY DÀNH CHO ĐIỆN THOẠI -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 glass z-40 border-t border-purple-500/30 px-2 py-2 flex justify-around items-center bg-slate-950/95 backdrop-blur-lg">
         <button onclick="switchTab('shop')" class="flex flex-col items-center text-purple-300 nav-btn-mob py-1 px-3 rounded-xl" data-target="shop">
             <i class="fa-solid fa-store text-lg"></i>
@@ -139,7 +139,7 @@
     <!-- MENU DROPDOWN 3 GẠCH CHO ĐIỆN THOẠI -->
     <div id="mobileDropdownMenu" class="md:hidden fixed bottom-16 right-4 z-50 glass bg-slate-950/95 border border-purple-500/40 rounded-2xl p-3 shadow-2xl hidden flex-col space-y-2 w-48">
         <button onclick="switchTab('shop'); toggleMobileMenu();" class="text-left px-3 py-2 rounded-xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-2"><i class="fa-solid fa-store text-purple-400"></i> Cửa Hàng Sản Phẩm</button>
-        <button onclick="switchTab('deposit'); toggleMobileMenu();" class="text-left px-3 py-2 rounded-xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-2"><i class="fa-solid fa-wallet text-purple-400"></i> Nạp Tiền (QR & Thẻ)</button>
+        <button onclick="switchTab('deposit'); toggleMobileMenu();" class="text-left px-3 py-2 rounded-xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-2"><i class="fa-solid fa-wallet text-purple-400"></i> Nạp Tiền (CK & Thẻ)</button>
         <button onclick="switchTab('profile'); toggleMobileMenu();" class="text-left px-3 py-2 rounded-xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-2"><i class="fa-solid fa-user-gear text-purple-400"></i> Hồ Sơ & Kho Key</button>
         <button onclick="switchTab('support'); toggleMobileMenu();" class="text-left px-3 py-2 rounded-xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-2"><i class="fa-solid fa-headset text-purple-400"></i> Hỗ Trợ 24/7</button>
     </div>
@@ -196,19 +196,39 @@
         <!-- TAB: NẠP TIỀN (NGÂN HÀNG & THẺ CÀO) -->
         <div id="tab-deposit" class="tab-content hidden">
             <div class="max-w-2xl mx-auto space-y-8">
-                <!-- Nạp Chuyển Khoản Ngân Hàng QR -->
+                <!-- Nạp Chuyển Khoản Ngân Hàng (STK & Tên Ngân Hàng) -->
                 <div class="glass p-8 rounded-3xl shadow-2xl border border-purple-500/30">
-                    <h2 class="text-2xl font-bold mb-6 text-center text-white"><i class="fa-solid fa-qrcode text-purple-400 mr-2"></i> Nạp Tiền Qua QR Ngân Hàng</h2>
-                    <div class="flex flex-col items-center mb-6">
-                        <p class="text-xs text-purple-200/70 mb-3 text-center">Quét mã QR bên dưới để chuyển khoản số dư vào tài khoản</p>
-                        <div class="bg-white p-3 rounded-2xl shadow-lg">
-                            <img id="qrDisplayImg" src="" alt="QR Code Bank" class="w-48 h-48 object-contain">
+                    <h2 class="text-2xl font-bold mb-6 text-center text-white"><i class="fa-solid fa-building-columns text-purple-400 mr-2"></i> Nạp Tiền Chuyển Khoản Ngân Hàng</h2>
+                    
+                    <!-- Khung thông tin STK & Tên ngân hàng -->
+                    <div class="bg-[#170c2e]/80 border border-purple-500/30 rounded-2xl p-6 mb-6 space-y-3">
+                        <div class="flex justify-between items-center border-b border-purple-900/40 pb-2">
+                            <span class="text-xs text-purple-300">Tên Ngân Hàng:</span>
+                            <span id="bankNameDisplay" class="font-bold text-white text-sm">MB Bank</span>
                         </div>
-                        <p id="qrInfoText" class="text-xs font-semibold text-purple-300 mt-3 text-center">Chuyển khoản đúng nội dung để hệ thống xử lý tự động</p>
+                        <div class="flex justify-between items-center border-b border-purple-900/40 pb-2">
+                            <span class="text-xs text-purple-300">Số Tài Khoản:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="bankStkDisplay" class="font-mono font-bold text-purple-300 text-base">0123456789</span>
+                                <button onclick="copyToClipboard('bankStkDisplay')" class="text-xs bg-purple-900/50 hover:bg-purple-800 text-purple-200 px-2.5 py-1 rounded-lg transition"><i class="fa-solid fa-copy"></i> Sao chép</button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-purple-900/40 pb-2">
+                            <span class="text-xs text-purple-300">Chủ Tài Khoản:</span>
+                            <span id="bankOwnerDisplay" class="font-bold text-white text-sm">NGUYEN VAN A</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-purple-300">Nội Dung Chuyển Khoản:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="bankContentDisplay" class="font-mono font-bold text-amber-300 text-sm">nap [username]</span>
+                                <button onclick="copyToClipboard('bankContentDisplay')" class="text-xs bg-purple-900/50 hover:bg-purple-800 text-purple-200 px-2.5 py-1 rounded-lg transition"><i class="fa-solid fa-copy"></i> Sao chép</button>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-xs text-purple-300 mb-1">Số Tiền Nạp (VNĐ)</label>
+                            <label class="block text-xs text-purple-300 mb-1">Số Tiền Đã Chuyển (VNĐ)</label>
                             <input type="number" id="depositAmount" placeholder="Nhập số tiền..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
                         </div>
                         <button onclick="requestDeposit()" class="w-full btn-purple text-white font-bold py-3.5 rounded-xl transition shadow-lg text-sm">
@@ -361,13 +381,24 @@
                     <button onclick="saveAdminTelegram()" class="btn-amber text-slate-950 font-bold px-6 py-2.5 rounded-xl text-sm shadow-md">Lưu Cấu Hình Telegram</button>
                 </div>
 
-                <!-- Cài đặt QR Ngân hàng -->
+                <!-- Cài đặt Thông tin Ngân hàng (STK, Tên NH, Chủ TK) -->
                 <div class="bg-[#170c2e]/60 p-6 rounded-2xl border border-purple-500/20 mb-8">
-                    <h3 class="text-lg font-bold mb-3 text-amber-300">Cài Đặt Ảnh QR Nạp Tiền Ngân Hàng</h3>
-                    <div class="flex gap-4">
-                        <input type="text" id="adminQrInput" placeholder="Nhập đường dẫn ảnh QR (URL)..." class="flex-grow bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
-                        <button onclick="saveAdminQr()" class="btn-purple font-bold px-6 py-2.5 rounded-xl text-sm text-white">Cập Nhật QR</button>
+                    <h3 class="text-lg font-bold mb-3 text-amber-300"><i class="fa-solid fa-building-columns mr-2"></i> Cài Đặt Thông Tin Ngân Hàng Nạp Tiền</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Tên Ngân Hàng</label>
+                            <input type="text" id="adminBankNameInput" placeholder="Ví dụ: MB Bank, Techcombank..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Số Tài Khoản (STK)</label>
+                            <input type="text" id="adminBankStkInput" placeholder="Nhập số tài khoản..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Chủ Tài Khoản</label>
+                            <input type="text" id="adminBankOwnerInput" placeholder="Nhập tên chủ tài khoản..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        </div>
                     </div>
+                    <button onclick="saveAdminBankInfo()" class="btn-purple font-bold px-6 py-2.5 rounded-xl text-sm text-white">Lưu Thông Tin Ngân Hàng</button>
                 </div>
 
                 <!-- Duyệt tiền & Thẻ cào All -->
@@ -488,7 +519,11 @@
             ],
             userKeys: [], 
             deposits: [], 
-            qrUrl: 'https://api.vietqr.io/image/970422-0381234567-xxxxxx.jpg?amount=0&addInfo=NAP',
+            bankInfo: {
+                bankName: 'MB Bank',
+                stk: '0987654321',
+                owner: 'NGUYEN VAN ADMIN'
+            },
             telegram: {
                 token: '',
                 chatId: ''
@@ -496,10 +531,24 @@
         };
 
         let db = JSON.parse(localStorage.getItem('unbanFF_VioletDB_FullPro')) || defaultDB;
+        // Đảm bảo tương thích nếu thiếu key bankInfo
+        if(!db.bankInfo) {
+            db.bankInfo = { bankName: 'MB Bank', stk: '0987654321', owner: 'NGUYEN VAN ADMIN' };
+        }
 
         function saveDB() {
             localStorage.setItem('unbanFF_VioletDB_FullPro', JSON.stringify(db));
             renderAll();
+        }
+
+        // Hàm sao chép nhanh
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Đã sao chép: ' + text);
+            }).catch(err => {
+                console.error('Không thể sao chép', err);
+            });
         }
 
         // Hàm gửi thông báo Telegram tự động
@@ -646,9 +695,9 @@
             db.deposits.push({
                 id: Date.now(),
                 username: db.currentUser,
-                type: 'Chuyển Khoản QR',
+                type: 'Chuyển Khoản NH',
                 amount: amt,
-                detail: 'Nạp qua QR Ngân Hàng',
+                detail: `CK đến ${db.bankInfo.bankName} - STK: ${db.bankInfo.stk}`,
                 status: 'Chờ duyệt',
                 time: new Date().toLocaleString()
             });
@@ -657,7 +706,7 @@
             document.getElementById('depositAmount').value = '';
 
             // Gửi thông báo Telegram nạp tiền
-            sendTelegramNotification(`💰 <b>CÓ YÊU CẦU NẠP TIỀN CHỜ DUYỆT!</b>\n👤 User: <b>${db.currentUser}</b>\n💵 Hình thức: <b>Chuyển khoản QR</b>\n💎 Số tiền: <b>${amt.toLocaleString()} đ</b>`);
+            sendTelegramNotification(`💰 <b>CÓ YÊU CẦU NẠP TIỀN CHỜ DUYỆT!</b>\n👤 User: <b>${db.currentUser}</b>\n💵 Hình thức: <b>Chuyển khoản NH</b>\n💎 Số tiền: <b>${amt.toLocaleString()} đ</b>`);
 
             alert('Gửi yêu cầu nạp tiền thành công! Vui lòng chờ Admin duyệt.');
             switchTab('profile');
@@ -704,12 +753,16 @@
             alert('Lưu cấu hình Telegram thành công!');
         }
 
-        function saveAdminQr() {
-            const url = document.getElementById('adminQrInput').value.trim();
-            if(!url) { alert('Vui lòng nhập link ảnh QR!'); return; }
-            db.qrUrl = url;
+        function saveAdminBankInfo() {
+            const bankName = document.getElementById('adminBankNameInput').value.trim();
+            const stk = document.getElementById('adminBankStkInput').value.trim();
+            const owner = document.getElementById('adminBankOwnerInput').value.trim();
+
+            if(!bankName || !stk || !owner) { alert('Vui lòng điền đầy đủ thông tin ngân hàng!'); return; }
+
+            db.bankInfo = { bankName, stk, owner };
             saveDB();
-            alert('Cập nhật QR ngân hàng thành công!');
+            alert('Cập nhật thông tin ngân hàng thành công!');
         }
 
         function addProduct() {
@@ -836,10 +889,17 @@
                 adminBannerShortcut.classList.add('hidden');
             }
 
-            document.getElementById('qrDisplayImg').src = db.qrUrl;
+            // Hiển thị thông tin ngân hàng nạp tiền
+            document.getElementById('bankNameDisplay').innerText = db.bankInfo.bankName;
+            document.getElementById('bankStkDisplay').innerText = db.bankInfo.stk;
+            document.getElementById('bankOwnerDisplay').innerText = db.bankInfo.owner;
+            document.getElementById('bankContentDisplay').innerText = 'nap ' + (curr ? curr.username : 'username');
+
             document.getElementById('telegramTokenInput').value = db.telegram.token || '';
             document.getElementById('telegramChatIdInput').value = db.telegram.chatId || '';
-            document.getElementById('adminQrInput').value = db.qrUrl || '';
+            document.getElementById('adminBankNameInput').value = db.bankInfo.bankName || '';
+            document.getElementById('adminBankStkInput').value = db.bankInfo.stk || '';
+            document.getElementById('adminBankOwnerInput').value = db.bankInfo.owner || '';
 
             // Products list
             document.getElementById('productList').innerHTML = db.products.map(p => `
