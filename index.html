@@ -3,226 +3,1005 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINH THỊNH CHỌC CHÓ</title>
-    <!-- Font Awesome Icons -->
+    <title>Hệ Thống Unban Free Fire - Tím Huyền Bí & Admin Pro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Nunito', sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, #0f0c1b 0%, #1e1136 50%, #120926 100%); 
+            color: #f3e8ff; 
+            overflow-x: hidden;
+            padding-bottom: 75px; 
         }
-
-        body {
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #334155;
+        .glass { 
+            background: rgba(45, 27, 84, 0.45); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(168, 85, 247, 0.2); 
         }
-
-        .card {
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-            max-width: 550px;
-            width: 100%;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Dog Icon Banner Container */
-        .dog-wrapper {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            background: #fff7ed;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 24px;
-            border: 4px solid #ffedd5;
-        }
-
-        .dog-icon {
-            font-size: 70px;
-            color: #f97316;
-            animation: bounce 2s infinite ease-in-out;
-        }
-
-        /* Wrench icon badge */
-        .tool-badge {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background: #0ea5e9;
-            color: #fff;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            border: 3px solid #fff;
-            animation: rotate 4s infinite linear;
-        }
-
-        h1 {
-            font-size: 28px;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        p.description {
-            font-size: 16px;
-            color: #64748b;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* Progress Bar */
-        .progress-box {
-            margin-bottom: 30px;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            font-weight: 700;
-            color: #475569;
-            margin-bottom: 8px;
-        }
-
-        .progress-bar-container {
-            width: 100%;
-            height: 14px;
-            background-color: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 75%;
-            background: linear-gradient(90deg, #f97316, #fb923c);
-            border-radius: 10px;
-            position: relative;
-            animation: progress-stripe 1.5s linear infinite;
-        }
-
-        /* Contact / Social Links */
-        .contact-info {
-            border-top: 1px solid #f1f5f9;
-            padding-top: 20px;
-            margin-top: 10px;
-        }
-
-        .contact-info p {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 12px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #f8fafc;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
+        .btn-purple {
+            background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%);
             transition: all 0.3s ease;
-            font-size: 16px;
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
+        }
+        .btn-purple:hover {
+            background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+            transform: translateY(-1px);
+        }
+        .btn-amber {
+            background: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+        }
+        .btn-amber:hover {
+            background: linear-gradient(135deg, #b45309 0%, #f59e0b 100%);
+            transform: translateY(-1px);
         }
 
-        .social-links a:hover {
-            background: #f97316;
-            color: #ffffff;
-            transform: translateY(-3px);
-            border-color: #f97316;
+        /* Hiệu ứng tuyết rơi */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            background: #ffffff;
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall linear infinite;
         }
-
-        /* Animations */
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+        @keyframes fall {
+            0% { transform: translateY(-10px) translateX(0); }
+            50% { transform: translateY(50vh) translateX(20px); }
+            100% { transform: translateY(105vh) translateX(-20px); }
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col relative">
 
-    <div class="card">
-        <!-- Dog Icon Container -->
-        <div class="dog-wrapper">
-            <i class="fa-solid fa-dog dog-icon"></i>
-            <div class="tool-badge">
-                <i class="fa-solid fa-wrench"></i>
+    <!-- CÁC HẠT TUYẾT RƠI -->
+    <div id="snow-container"></div>
+
+    <!-- THÔNG BÁO THẤT BẠI -->
+    <div id="fullScreenAlert" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center hidden px-4">
+        <div class="glass border border-red-500/50 p-8 rounded-3xl max-w-md text-center shadow-2xl bg-slate-950/90 w-full">
+            <i class="fa-solid fa-circle-xmark text-6xl text-red-500 mb-4"></i>
+            <h2 class="text-2xl font-bold text-red-400 mb-2">Thất Bại!</h2>
+            <p id="alertMessage" class="text-red-200 mb-6 text-sm">Tài khoản không đủ tiền hoặc thao tác lỗi!</p>
+            <button onclick="closeFullScreenAlert()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-6 rounded-xl transition shadow-lg text-sm w-full">Đóng Lại</button>
+        </div>
+    </div>
+
+    <!-- THÔNG BÁO THÀNH CÔNG -->
+    <div id="fullScreenSuccess" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center hidden px-4">
+        <div class="glass border border-purple-500/50 p-8 rounded-3xl max-w-md text-center shadow-2xl bg-slate-950/90 w-full">
+            <i class="fa-solid fa-circle-check text-6xl text-purple-400 mb-4"></i>
+            <h2 class="text-2xl font-bold text-purple-300 mb-2">Thành Công Tuyệt Đối!</h2>
+            <p id="successMessage" class="text-purple-200 mb-6 text-sm">Thao tác xử lý hoàn tất!</p>
+            <button onclick="closeSuccessAlert()" class="btn-purple text-white font-bold py-2.5 px-6 rounded-xl text-sm w-full">Xác Nhận</button>
+        </div>
+    </div>
+
+    <!-- NAVBAR TRÊN CHO PC -->
+    <nav class="glass sticky top-0 z-40 px-6 py-4 flex justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('shop')">
+            <div class="w-10 h-10 rounded-xl bg-purple-600/30 flex items-center justify-center border border-purple-400/30">
+                <i class="fa-solid fa-shield-cat text-purple-300 text-xl"></i>
+            </div>
+            <span class="text-xl font-bold tracking-wider bg-gradient-to-r from-purple-300 to-white bg-clip-text text-transparent">UNBAN FF VIP</span>
+        </div>
+        <div class="hidden md:flex space-x-6 text-sm font-medium items-center">
+            <button onclick="switchTab('shop')" class="hover:text-purple-300 transition nav-btn text-purple-300" data-target="shop">Sản Phẩm</button>
+            <button onclick="switchTab('deposit')" class="hover:text-purple-300 transition nav-btn" data-target="deposit">Nạp Tiền</button>
+            <button onclick="switchTab('profile')" class="hover:text-purple-300 transition nav-btn" data-target="profile">Hồ Sơ</button>
+            <button onclick="switchTab('support')" class="hover:text-purple-300 transition nav-btn" data-target="support">Hỗ Trợ</button>
+            <button id="adminNavbarShortcut" onclick="switchTab('admin')" class="btn-amber text-slate-950 text-xs px-3 py-1.5 rounded-xl font-extrabold hidden items-center gap-1">
+                <i class="fa-solid fa-gauge-high"></i> Admin Panel
+            </button>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="glass px-3.5 py-1.5 rounded-full text-xs font-semibold text-purple-200 border border-purple-400/30">
+                <i class="fa-solid fa-wallet text-purple-400 mr-1"></i> <span id="userBalanceDisplay">0</span> đ
+            </div>
+            <button onclick="openAuthModal()" id="authBtn" class="btn-purple text-white text-xs px-4 py-2 rounded-xl font-semibold">Đăng Nhập</button>
+        </div>
+    </nav>
+
+    <!-- THANH MENU ĐIỀU HƯỚNG DƯỚI ĐÁY DÀNH CHO ĐIỆN THOẠI -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 glass z-40 border-t border-purple-500/30 px-2 py-2 flex justify-around items-center bg-slate-950/95 backdrop-blur-lg">
+        <button onclick="switchTab('shop')" class="flex flex-col items-center text-purple-300 nav-btn-mob py-1 px-3 rounded-xl" data-target="shop">
+            <i class="fa-solid fa-store text-lg"></i>
+            <span class="text-[10px] mt-0.5">Shop</span>
+        </button>
+        <button onclick="switchTab('deposit')" class="flex flex-col items-center text-purple-200/70 nav-btn-mob py-1 px-3 rounded-xl" data-target="deposit">
+            <i class="fa-solid fa-wallet text-lg"></i>
+            <span class="text-[10px] mt-0.5">Nạp Tiền</span>
+        </button>
+        <button onclick="switchTab('profile')" class="flex flex-col items-center text-purple-200/70 nav-btn-mob py-1 px-3 rounded-xl" data-target="profile">
+            <i class="fa-solid fa-user-gear text-lg"></i>
+            <span class="text-[10px] mt-0.5">Hồ Sơ</span>
+        </button>
+        <button onclick="switchTab('support')" class="flex flex-col items-center text-purple-200/70 nav-btn-mob py-1 px-3 rounded-xl" data-target="support">
+            <i class="fa-solid fa-headset text-lg"></i>
+            <span class="text-[10px] mt-0.5">Hỗ Trợ</span>
+        </button>
+        <button onclick="toggleMobileMenu()" class="flex flex-col items-center text-purple-200/70 py-1 px-3 rounded-xl">
+            <i class="fa-solid fa-bars text-lg text-amber-400"></i>
+            <span class="text-[10px] mt-0.5 font-bold">Danh Mục</span>
+        </button>
+        <button id="adminMobileTabBtn" onclick="switchTab('admin')" class="flex flex-col items-center text-amber-400 nav-btn-mob py-1 px-3 rounded-xl hidden" data-target="admin">
+            <i class="fa-solid fa-shield-halved text-lg"></i>
+            <span class="text-[10px] mt-0.5 font-bold">Admin</span>
+        </button>
+    </div>
+
+    <!-- MENU DROPDOWN 3 GẠCH CHO ĐIỆN THOẠI -->
+    <div id="mobileDropdownMenu" class="md:hidden fixed bottom-16 right-4 z-50 glass bg-slate-950/95 border border-purple-500/40 rounded-2xl p-3 shadow-2xl hidden flex-col space-y-2 w-48">
+        <button onclick="switchTab('shop'); toggleMobileMenu();" class="text-left px-3 py-2 rounded-xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-2"><i class="fa-solid fa-store text-purple-400"></i> Cửa Hàng Sản Phẩm</button>
+        <button onclick="switchTab('deposit'); toggleMobileMenu();" class="text-left px-3 py-2 rounded-xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-2"><i class="fa-solid fa-wallet text-purple-400"></i> Nạp Tiền (CK & Thẻ)</button>
+        <button onclick="switchTab('profile'); toggleMobileMenu();" class="text-left px-3 py-2 rounded-xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-2"><i class="fa-solid fa-user-gear text-purple-400"></i> Hồ Sơ & Kho Key</button>
+        <button onclick="switchTab('support'); toggleMobileMenu();" class="text-left px-3 py-2 rounded-xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-2"><i class="fa-solid fa-headset text-purple-400"></i> Hỗ Trợ 24/7</button>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl relative z-10">
+
+        <!-- TAB: SẢN PHẨM & KÍCH HOẠT -->
+        <div id="tab-shop" class="tab-content">
+            <div id="adminBannerShortcut" class="hidden mb-6 p-4 rounded-2xl bg-amber-950/40 border border-amber-500/40 flex justify-between items-center shadow-lg">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-user-shield text-amber-400 text-2xl"></i>
+                    <div>
+                        <h4 class="font-bold text-amber-300 text-sm">Quản Trị Viên (Admin Mode Active)</h4>
+                        <p class="text-xs text-amber-200/70">Dữ liệu được lưu trữ tự động trên trình duyệt Realtime.</p>
+                    </div>
+                </div>
+                <button onclick="switchTab('admin')" class="btn-amber text-slate-950 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1 shadow-md">
+                    <i class="fa-solid fa-screwdriver-wrench"></i> Mở Bảng Admin
+                </button>
+            </div>
+
+            <div class="text-center mb-10">
+                <h1 class="text-3xl font-extrabold mb-2 text-white">Cửa Hàng Mua & Kích Hoạt Key Unban</h1>
+                <p class="text-purple-200/70 text-sm">Sở hữu key bản quyền, dán ID Gem để unban thiết bị Free Fire tức thì.</p>
+            </div>
+
+            <!-- Danh sách sản phẩm -->
+            <div id="productList" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <!-- Render bằng JS -->
+            </div>
+
+            <!-- Khu vực dán ID game & Key kích hoạt -->
+            <div class="glass p-8 rounded-3xl max-w-2xl mx-auto shadow-2xl border border-purple-500/30">
+                <h2 class="text-xl font-bold mb-4 flex items-center text-purple-200"><i class="fa-solid fa-key text-purple-400 mr-2"></i> Kích Hoạt Key & Dán ID Gem</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs text-purple-300 mb-1">Chọn Key Trong Kho Của Bạn</label>
+                        <select id="activateKeySelect" class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
+                            <option value="">-- Bạn chưa có key nào trong kho --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-purple-300 mb-1">Nhập ID Gem (ID Game Free Fire)</label>
+                        <input type="text" id="gameIdInput" placeholder="Ví dụ: 987654321" class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
+                    </div>
+                    <button onclick="handleActivateKey()" class="w-full btn-purple text-white font-bold py-3.5 rounded-xl transition shadow-lg text-sm">
+                        Xác Nhận Kích Hoạt Unban
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- Heading & Subtext -->
-        <h1>CHỌC CHÓ NÓ CAY LIU LIU </h1>
-        <p class="description">
-            Chú cún thông minh của chúng tôi đang tích cực nâng cấp trang web để đem lại trải nghiệm tốt nhất cho bạn. Rất mong bạn thông cảm và quay lại sau nhé! Woof! 🐾
-        </p>
+        <!-- TAB: NẠP TIỀN (NGÂN HÀNG & THẺ CÀO) -->
+        <div id="tab-deposit" class="tab-content hidden">
+            <div class="max-w-2xl mx-auto space-y-8">
+                <!-- Nạp Chuyển Khoản Ngân Hàng (STK & Tên Ngân Hàng) -->
+                <div class="glass p-8 rounded-3xl shadow-2xl border border-purple-500/30">
+                    <h2 class="text-2xl font-bold mb-6 text-center text-white"><i class="fa-solid fa-building-columns text-purple-400 mr-2"></i> Nạp Tiền Chuyển Khoản Ngân Hàng</h2>
+                    
+                    <!-- Khung thông tin STK & Tên ngân hàng -->
+                    <div class="bg-[#170c2e]/80 border border-purple-500/30 rounded-2xl p-6 mb-6 space-y-3">
+                        <div class="flex justify-between items-center border-b border-purple-900/40 pb-2">
+                            <span class="text-xs text-purple-300">Tên Ngân Hàng:</span>
+                            <span id="bankNameDisplay" class="font-bold text-white text-sm">MB Bank</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-purple-900/40 pb-2">
+                            <span class="text-xs text-purple-300">Số Tài Khoản:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="bankStkDisplay" class="font-mono font-bold text-purple-300 text-base">0123456789</span>
+                                <button onclick="copyToClipboard('bankStkDisplay')" class="text-xs bg-purple-900/50 hover:bg-purple-800 text-purple-200 px-2.5 py-1 rounded-lg transition"><i class="fa-solid fa-copy"></i> Sao chép</button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-purple-900/40 pb-2">
+                            <span class="text-xs text-purple-300">Chủ Tài Khoản:</span>
+                            <span id="bankOwnerDisplay" class="font-bold text-white text-sm">NGUYEN VAN A</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-purple-300">Nội Dung Chuyển Khoản:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="bankContentDisplay" class="font-mono font-bold text-amber-300 text-sm">nap [username]</span>
+                                <button onclick="copyToClipboard('bankContentDisplay')" class="text-xs bg-purple-900/50 hover:bg-purple-800 text-purple-200 px-2.5 py-1 rounded-lg transition"><i class="fa-solid fa-copy"></i> Sao chép</button>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Progress Bar -->
-        <div class="progress-box">
-            <div class="progress-label">
-                <span>Tiến độ cập nhật</span>
-                <span>75%</span>
-            </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar-fill"></div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Số Tiền Đã Chuyển (VNĐ)</label>
+                            <input type="number" id="depositAmount" placeholder="Nhập số tiền..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
+                        </div>
+                        <button onclick="requestDeposit()" class="w-full btn-purple text-white font-bold py-3.5 rounded-xl transition shadow-lg text-sm">
+                            Gửi Yêu Cầu Duyệt Tiền Ngân Hàng
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Nạp Thẻ Cào Điện Thoại -->
+                <div class="glass p-8 rounded-3xl shadow-2xl border border-amber-500/30">
+                    <h2 class="text-2xl font-bold mb-6 text-center text-amber-300"><i class="fa-solid fa-sim-card text-amber-400 mr-2"></i> Nạp Thẻ Cào Điện Thoại</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Chọn Nhà Mạng</label>
+                            <select id="cardTelco" class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
+                                <option value="Viettel">Viettel</option>
+                                <option value="Mobifone">Mobifone</option>
+                                <option value="Vinaphone">Vinaphone</option>
+                                <option value="Vietnamobile">Vietnamobile</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Chọn Mệnh Giá</label>
+                            <select id="cardAmount" class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
+                                <option value="10000">10,000 đ</option>
+                                <option value="20000">20,000 đ</option>
+                                <option value="50000">50,000 đ</option>
+                                <option value="100000">100,000 đ</option>
+                                <option value="200000">200,000 đ</option>
+                                <option value="500000">500,000 đ</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Mã Thẻ Cào</label>
+                            <input type="text" id="cardPin" placeholder="Nhập mã thẻ cào..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Số Seri Thẻ</label>
+                            <input type="text" id="cardSerial" placeholder="Nhập số seri..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
+                        </div>
+                        <button onclick="requestCardDeposit()" class="w-full btn-amber text-slate-950 font-bold py-3.5 rounded-xl transition shadow-lg text-sm">
+                            Gửi Thẻ Cào (Admin Duyệt Cộng Tiền)
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Footer / Contact Info -->
-        <div class="contact-info">
-            <p>Nếu bạn cần hỗ trợ gấp, vui lòng liên hệ với chúng tôi qua:</p>
-            <div class="social-links">
-                <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="mailto:support@example.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
-                <a href="tel:0123456789" title="Hotline"><i class="fa-solid fa-phone"></i></a>
+        <!-- TAB: HỒ SƠ -->
+        <div id="tab-profile" class="tab-content hidden">
+            <div class="max-w-4xl mx-auto glass p-8 rounded-3xl shadow-2xl border border-purple-500/30">
+                <h2 class="text-2xl font-bold mb-6 text-white">Hồ Sơ Thành Viên</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-[#170c2e]/60 p-5 rounded-2xl border border-purple-500/20">
+                        <p class="text-xs text-purple-300">Tên tài khoản</p>
+                        <p id="profileUsername" class="text-lg font-bold text-white">-</p>
+                    </div>
+                    <div class="bg-[#170c2e]/60 p-5 rounded-2xl border border-purple-500/20">
+                        <p class="text-xs text-purple-300">Số dư hiện tại</p>
+                        <p id="profileBalance" class="text-lg font-bold text-purple-400">0 đ</p>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold mb-4 text-purple-200">Kho Key Đã Mua Của Bạn</h3>
+                <div class="overflow-x-auto mb-8 rounded-2xl border border-purple-500/20">
+                    <table class="w-full text-left text-sm text-purple-100">
+                        <thead class="bg-purple-950/60 text-xs uppercase text-purple-300">
+                            <tr>
+                                <th class="px-4 py-3">Sản Phẩm</th>
+                                <th class="px-4 py-3">Mã Key</th>
+                                <th class="px-4 py-3">Trạng Thái</th>
+                                <th class="px-4 py-3">ID Gem Đã Unban</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userMyKeysTable" class="divide-y divide-purple-900/40">
+                            <!-- Render JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="text-lg font-bold mb-4 text-purple-200">Lịch Sử Nạp Tiền (Ngân Hàng & Thẻ Cào)</h3>
+                <div class="overflow-x-auto rounded-2xl border border-purple-500/20">
+                    <table class="w-full text-left text-sm text-purple-100">
+                        <thead class="bg-purple-950/60 text-xs uppercase text-purple-300">
+                            <tr>
+                                <th class="px-4 py-3">Hình Thức</th>
+                                <th class="px-4 py-3">Số Tiền</th>
+                                <th class="px-4 py-3">Chi Tiết Thẻ / Nội Dung</th>
+                                <th class="px-4 py-3">Trạng Thái</th>
+                                <th class="px-4 py-3">Thời Gian</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userDepositHistoryTable" class="divide-y divide-purple-900/40">
+                            <!-- Render JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: HỖ TRỢ -->
+        <div id="tab-support" class="tab-content hidden">
+            <div class="max-w-xl mx-auto glass p-8 rounded-3xl text-center shadow-2xl border border-purple-500/30">
+                <i class="fa-solid fa-headset text-5xl text-purple-400 mb-4"></i>
+                <h2 class="text-2xl font-bold mb-2 text-white">Hỗ Trợ Trực Tuyến 24/7</h2>
+                <p class="text-purple-200/70 text-sm mb-6">Mọi thắc mắc về key unban hoặc vấn đề nạp tiền, vui lòng liên hệ admin qua các kênh dưới đây.</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="https://t.me/" target="_blank" class="btn-purple px-6 py-3 rounded-xl font-bold text-sm text-white"><i class="fa-brands fa-telegram mr-2"></i> Telegram Admin</a>
+                    <a href="https://zalo.me/" target="_blank" class="bg-purple-800 hover:bg-purple-700 px-6 py-3 rounded-xl font-bold text-sm text-white transition"><i class="fa-solid fa-comment-sms mr-2"></i> Zalo Hỗ Trợ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: ADMIN PANEL ALL CHỨC NĂNG -->
+        <div id="tab-admin" class="tab-content hidden">
+            <div class="glass p-8 rounded-3xl shadow-2xl border border-amber-500/40 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-amber-300 flex items-center"><i class="fa-solid fa-gauge mr-2"></i> Bảng Admin Panel Toàn Diện (Lưu trữ LocalStorage Realtime)</h2>
+                    <button onclick="switchTab('shop')" class="bg-slate-800 hover:bg-slate-700 text-purple-200 px-4 py-2 rounded-xl text-xs font-bold">Quay Lại Shop</button>
+                </div>
+                
+                <!-- Thống kê tổng quan -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-[#170c2e] p-4 rounded-2xl border border-purple-500/20">
+                        <p class="text-xs text-purple-300">Tổng Người Dùng</p>
+                        <p id="statTotalUsers" class="text-2xl font-bold text-white">0</p>
+                    </div>
+                    <div class="bg-[#170c2e] p-4 rounded-2xl border border-purple-500/20">
+                        <p class="text-xs text-purple-300">Tổng Doanh Thu Web</p>
+                        <p id="statTotalRevenue" class="text-2xl font-bold text-purple-400">0 đ</p>
+                    </div>
+                    <div class="bg-[#170c2e] p-4 rounded-2xl border border-purple-500/20">
+                        <p class="text-xs text-purple-300">Tổng Sản Phẩm</p>
+                        <p id="statTotalProducts" class="text-2xl font-bold text-amber-300">0</p>
+                    </div>
+                    <div class="bg-[#170c2e] p-4 rounded-2xl border border-purple-500/20">
+                        <p class="text-xs text-purple-300">Key Tồn Kho All</p>
+                        <p id="statTotalKeys" class="text-2xl font-bold text-sky-300">0</p>
+                    </div>
+                </div>
+
+                <!-- Cài đặt Bot Telegram -->
+                <div class="bg-[#170c2e]/60 p-6 rounded-2xl border border-purple-500/20 mb-8">
+                    <h3 class="text-lg font-bold mb-3 text-amber-300"><i class="fa-brands fa-telegram mr-2"></i> Cấu Hình Bot Telegram Thông Báo (Duyệt Tiền & Unban)</h3>
+                    <p class="text-xs text-purple-200/70 mb-4">Nhập Bot Token và Chat ID Box để nhận thông báo tự động khi khách nạp tiền hoặc yêu cầu unban.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <input type="text" id="telegramTokenInput" placeholder="Nhập Bot Token (VD: 123456:ABC...)" class="bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        <input type="text" id="telegramChatIdInput" placeholder="Nhập Chat ID Box (VD: -100123456)" class="bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                    </div>
+                    <button onclick="saveAdminTelegram()" class="btn-amber text-slate-950 font-bold px-6 py-2.5 rounded-xl text-sm shadow-md">Lưu Cấu Hình Telegram</button>
+                </div>
+
+                <!-- Cài đặt Thông tin Ngân hàng (STK, Tên NH, Chủ TK) -->
+                <div class="bg-[#170c2e]/60 p-6 rounded-2xl border border-purple-500/20 mb-8">
+                    <h3 class="text-lg font-bold mb-3 text-amber-300"><i class="fa-solid fa-building-columns mr-2"></i> Cài Đặt Thông Tin Ngân Hàng Nạp Tiền</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Tên Ngân Hàng</label>
+                            <input type="text" id="adminBankNameInput" placeholder="Ví dụ: MB Bank, Techcombank..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Số Tài Khoản (STK)</label>
+                            <input type="text" id="adminBankStkInput" placeholder="Nhập số tài khoản..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-purple-300 mb-1">Chủ Tài Khoản</label>
+                            <input type="text" id="adminBankOwnerInput" placeholder="Nhập tên chủ tài khoản..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        </div>
+                    </div>
+                    <button onclick="saveAdminBankInfo()" class="btn-purple font-bold px-6 py-2.5 rounded-xl text-sm text-white">Lưu Thông Tin Ngân Hàng</button>
+                </div>
+
+                <!-- Duyệt tiền & Thẻ cào All -->
+                <div class="bg-[#170c2e]/60 p-6 rounded-2xl border border-purple-500/20 mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-amber-300">Duyệt Nạp Tiền & Thẻ Cào Chờ Xử Lý</h3>
+                        <button onclick="approveAllDeposits()" class="btn-amber text-slate-950 font-bold px-4 py-2 rounded-xl text-xs shadow-md">Duyệt Tất Cả (All)</button>
+                    </div>
+                    <div class="overflow-x-auto rounded-xl border border-purple-500/10">
+                        <table class="w-full text-left text-sm text-purple-100">
+                            <thead class="bg-purple-950/60 text-xs uppercase text-purple-300">
+                                <tr>
+                                    <th class="px-4 py-3">Người Dùng</th>
+                                    <th class="px-4 py-3">Hình Thức</th>
+                                    <th class="px-4 py-3">Số Tiền</th>
+                                    <th class="px-4 py-3">Thông Tin Chi Tiết</th>
+                                    <th class="px-4 py-3">Trạng Thái</th>
+                                    <th class="px-4 py-3">Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminDepositTable" class="divide-y divide-purple-900/40">
+                                <!-- Render JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quản lý Sản Phẩm & Key -->
+                <div class="bg-[#170c2e]/60 p-6 rounded-2xl border border-purple-500/20 mb-8">
+                    <h3 class="text-lg font-bold mb-4 text-amber-300">Quản Lý Sản Phẩm, Thêm Xóa Sửa & Tạo Key Tự Động</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <input type="text" id="newProdName" placeholder="Tên gói (Ví dụ: Unban Vĩnh Viễn)" class="bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        <input type="number" id="newProdPrice" placeholder="Giá tiền (VNĐ)" class="bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-2.5 text-sm text-white">
+                        <button onclick="addProduct()" class="btn-purple font-bold py-2.5 rounded-xl text-sm text-white">Thêm Sản Phẩm Mới</button>
+                    </div>
+                    <div id="adminProductManageList" class="space-y-4">
+                        <!-- Render JS -->
+                    </div>
+                </div>
+
+                <!-- Danh sách tất cả người dùng và dữ liệu lưu trữ -->
+                <div class="bg-[#170c2e]/60 p-6 rounded-2xl border border-purple-500/20">
+                    <h3 class="text-lg font-bold mb-4 text-amber-300">Danh Sách Tất Cả Người Dùng & Dữ Liệu Lưu Trữ</h3>
+                    <div class="overflow-x-auto rounded-xl border border-purple-500/10">
+                        <table class="w-full text-left text-sm text-purple-100">
+                            <thead class="bg-purple-950/60 text-xs uppercase text-purple-300">
+                                <tr>
+                                    <th class="px-4 py-3">Tên Tài Khoản</th>
+                                    <th class="px-4 py-3">Mật Khẩu</th>
+                                    <th class="px-4 py-3">Quyền Hạn</th>
+                                    <th class="px-4 py-3">Số Dư (VNĐ)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminAllUsersTable" class="divide-y divide-purple-900/40">
+                                <!-- Render JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODAL ĐĂNG NHẬP / ĐĂNG KÝ -->
+    <div id="authModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center hidden px-4">
+        <div class="glass p-8 rounded-3xl w-full max-w-md relative shadow-2xl border border-purple-500/40 bg-slate-950/95">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-purple-300 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h2 id="authTitle" class="text-2xl font-bold mb-6 text-center text-white">Đăng Nhập Tài Khoản</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs text-purple-300 mb-1">Tên Đăng Nhập</label>
+                    <input type="text" id="authUsername" placeholder="Nhập tài khoản..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
+                </div>
+                <div>
+                    <label class="block text-xs text-purple-300 mb-1">Mật Khẩu</label>
+                    <input type="password" id="authPassword" placeholder="Nhập mật khẩu..." class="w-full bg-[#170c2e] border border-purple-500/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-purple-400 text-white">
+                </div>
+                <button onclick="handleAuth()" id="authActionBtn" class="w-full btn-purple text-white font-bold py-3.5 rounded-xl shadow-lg text-sm">Đăng Nhập</button>
+                <div class="text-center mt-4">
+                    <button onclick="toggleAuthMode()" id="authSwitchModeBtn" class="text-xs text-purple-300 hover:text-white underline">Chưa có tài khoản? Đăng ký ngay</button>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- FOOTER -->
+    <footer class="glass py-4 text-center text-xs text-purple-300/60 mt-auto relative z-10">
+        &copy; 2026 Unban Free Fire System. Full LocalStorage Realtime & Telegram Notifications.
+    </footer>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        // Tuyết rơi
+        const snowContainer = document.getElementById('snow-container');
+        for (let i = 0; i < 30; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.top = `${Math.random() * -100}vh`;
+            const size = Math.random() * 5 + 2;
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+            snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            snowflake.style.animationDelay = `${Math.random() * 5}s`;
+            snowContainer.appendChild(snowflake);
+        }
+
+        // Database khởi tạo
+        const defaultDB = {
+            users: [
+                { username: 'admin', password: '123456', balance: 500000, isAdmin: true }
+            ],
+            currentUser: null,
+            products: [
+                { id: 1, name: 'Gói Unban Vĩnh Viễn VIP', price: 1000000, keys: ['KEY-FF-VIP-1111', 'KEY-FF-VIP-2222'] },
+                { id: 2, name: 'Gói Unban 30 Ngày', price: 50000, keys: ['KEY-FF-30D-8888'] }
+            ],
+            userKeys: [], 
+            deposits: [], 
+            bankInfo: {
+                bankName: 'ZALO PAY',
+                stk: '0909319453',
+                owner: 'TRAN NHAT KHANG'
+            },
+            telegram: {
+                token: '',
+                chatId: ''
+            }
+        };
+
+        let db = JSON.parse(localStorage.getItem('unbanFF_VioletDB_FullPro')) || defaultDB;
+        // Đảm bảo tương thích nếu thiếu key bankInfo
+        if(!db.bankInfo) {
+            db.bankInfo = { bankName: 'ZALO PAY', stk: '0909319453', owner: 'TRAN NHAT KHANG' };
+        }
+
+        function saveDB() {
+            localStorage.setItem('unbanFF_VioletDB_FullPro', JSON.stringify(db));
+            renderAll();
+        }
+
+        // Hàm sao chép nhanh
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Đã sao chép: ' + text);
+            }).catch(err => {
+                console.error('Không thể sao chép', err);
+            });
+        }
+
+        // Hàm gửi thông báo Telegram tự động
+        function sendTelegramNotification(message) {
+            if(!db.telegram.token || !db.telegram.chatId) return;
+            const url = `https://api.telegram.org/bot${db.telegram.token}/sendMessage`;
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: db.telegram.chatId,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            }).catch(err => console.log('Telegram Error:', err));
+        }
+
+        let isRegisterMode = false;
+
+        function openAuthModal() { document.getElementById('authModal').classList.remove('hidden'); }
+        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
+        
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileDropdownMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleAuthMode() {
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('authTitle').innerText = isRegisterMode ? 'Đăng Ký Tài Khoản' : 'Đăng Nhập Tài Khoản';
+            document.getElementById('authActionBtn').innerText = isRegisterMode ? 'Đăng Ký' : 'Đăng Nhập';
+            document.getElementById('authSwitchModeBtn').innerText = isRegisterMode ? 'Đã có tài khoản? Đăng nhập' : 'Chưa có tài khoản? Đăng ký ngay';
+        }
+
+        function handleAuth() {
+            const u = document.getElementById('authUsername').value.trim();
+            const p = document.getElementById('authPassword').value.trim();
+            if(!u || !p) { alert('Vui lòng điền đầy đủ thông tin!'); return; }
+
+            if(isRegisterMode) {
+                if(db.users.find(x => x.username === u)) { alert('Tài khoản đã tồn tại!'); return; }
+                db.users.push({ username: u, password: p, balance: 0, isAdmin: false });
+                alert('Đăng ký thành công! Hãy đăng nhập.');
+                toggleAuthMode();
+                saveDB();
+            } else {
+                const user = db.users.find(x => x.username === u && x.password === p);
+                if(!user) { alert('Sai tài khoản hoặc mật khẩu!'); return; }
+                db.currentUser = user.username;
+                closeAuthModal();
+                saveDB();
+                alert('Đăng nhập thành công!');
+            }
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            
+            // Highlight navbar & mobile bottom buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('text-purple-300'));
+            const target = document.querySelector(`.nav-btn[data-target="${tabId}"]`);
+            if(target) target.classList.add('text-purple-300');
+
+            document.querySelectorAll('.nav-btn-mob').forEach(btn => {
+                btn.classList.remove('text-purple-300');
+                btn.classList.add('text-purple-200/70');
+            });
+            const mobTarget = document.querySelector(`.nav-btn-mob[data-target="${tabId}"]`);
+            if(mobTarget) {
+                mobTarget.classList.add('text-purple-300');
+                mobTarget.classList.remove('text-purple-200/70');
+            }
+
+            renderAll();
+        }
+
+        // Mua sản phẩm
+        function buyProduct(prodId) {
+            if(!db.currentUser) { alert('Vui lòng đăng nhập để mua key!'); openAuthModal(); return; }
+            const user = db.users.find(x => x.username === db.currentUser);
+            const prod = db.products.find(x => x.id === prodId);
+
+            if(prod.keys.length === 0) {
+                showFullScreenAlert("Thất bại! Sản phẩm này đã hết key trong kho.");
+                return;
+            }
+
+            if(user.balance < prod.price) {
+                showFullScreenAlert("Thất bại! Tài khoản của bạn không đủ tiền để mua gói này. Vui lòng nạp thêm tiền.");
+                return;
+            }
+
+            user.balance -= prod.price;
+            const keyItem = prod.keys.shift();
+
+            db.userKeys.push({
+                username: user.username,
+                productId: prod.id,
+                productName: prod.name,
+                keyStr: keyItem,
+                status: 'Chưa dùng',
+                gameId: ''
+            });
+
+            saveDB();
+            showFullScreenSuccess(`Mua thành công gói ${prod.name}! Key của bạn là: ${keyItem}`);
+        }
+
+        // Kích hoạt key bằng ID gem
+        function handleActivateKey() {
+            if(!db.currentUser) { alert('Vui lòng đăng nhập!'); openAuthModal(); return; }
+            const keyStr = document.getElementById('activateKeySelect').value;
+            const gameId = document.getElementById('gameIdInput').value.trim();
+
+            if(!keyStr) { showFullScreenAlert("Thất bại! Bạn chưa chọn key cần kích hoạt."); return; }
+            if(!gameId) { showFullScreenAlert("Thất bại! Bạn chưa nhập ID Gem (ID Game Free Fire)."); return; }
+
+            const userKey = db.userKeys.find(x => x.keyStr === keyStr && x.username === db.currentUser);
+            if(!userKey) { showFullScreenAlert("Thất bại! Key không hợp lệ hoặc không thuộc sở hữu của bạn."); return; }
+
+            if(userKey.status === 'Đã dùng') {
+                showFullScreenAlert("Thất bại! Key này đã được kích hoạt từ trước rồi.");
+                return;
+            }
+
+            userKey.status = 'Đã dùng';
+            userKey.gameId = gameId;
+            saveDB();
+
+            // Gửi thông báo Telegram yêu cầu unban
+            sendTelegramNotification(`🚀 <b>YÊU CẦU UNBAN MỚI!</b>\n👤 User: <b>${db.currentUser}</b>\n🎮 ID Game: <b>${gameId}</b>\n🔑 Key: <code>${keyStr}</code>`);
+
+            showFullScreenSuccess(`Kích hoạt thành công! Thiết bị với ID Gem [${gameId}] đã gửi yêu cầu unban.`);
+            document.getElementById('gameIdInput').value = '';
+        }
+
+        // Nạp qua chuyển khoản ngân hàng
+        function requestDeposit() {
+            if(!db.currentUser) { alert('Vui lòng đăng nhập!'); openAuthModal(); return; }
+            const amt = parseInt(document.getElementById('depositAmount').value);
+            if(!amt || amt <= 0) { alert('Số tiền nạp không hợp lệ!'); return; }
+
+            db.deposits.push({
+                id: Date.now(),
+                username: db.currentUser,
+                type: 'Chuyển Khoản NH',
+                amount: amt,
+                detail: `CK đến ${db.bankInfo.bankName} - STK: ${db.bankInfo.stk}`,
+                status: 'Chờ duyệt',
+                time: new Date().toLocaleString()
+            });
+
+            saveDB();
+            document.getElementById('depositAmount').value = '';
+
+            // Gửi thông báo Telegram nạp tiền
+            sendTelegramNotification(`💰 <b>CÓ YÊU CẦU NẠP TIỀN CHỜ DUYỆT!</b>\n👤 User: <b>${db.currentUser}</b>\n💵 Hình thức: <b>Chuyển khoản NH</b>\n💎 Số tiền: <b>${amt.toLocaleString()} đ</b>`);
+
+            alert('Gửi yêu cầu nạp tiền thành công! Vui lòng chờ Admin duyệt.');
+            switchTab('profile');
+        }
+
+        // Nạp qua thẻ cào
+        function requestCardDeposit() {
+            if(!db.currentUser) { alert('Vui lòng đăng nhập!'); openAuthModal(); return; }
+            const telco = document.getElementById('cardTelco').value;
+            const amt = parseInt(document.getElementById('cardAmount').value);
+            const pin = document.getElementById('cardPin').value.trim();
+            const serial = document.getElementById('cardSerial').value.trim();
+
+            if(!pin || !serial) { alert('Vui lòng nhập đầy đủ mã thẻ và số seri!'); return; }
+
+            db.deposits.push({
+                id: Date.now(),
+                username: db.currentUser,
+                type: 'Thẻ Cào',
+                amount: amt,
+                detail: `${telco} - Seri: ${serial} - Pin: ${pin}`,
+                status: 'Chờ duyệt',
+                time: new Date().toLocaleString()
+            });
+
+            saveDB();
+            document.getElementById('cardPin').value = '';
+            document.getElementById('cardSerial').value = '';
+
+            // Gửi thông báo Telegram thẻ cào
+            sendTelegramNotification(`💳 <b>CÓ THẺ CÀO MỚI CHỜ DUYỆT!</b>\n👤 User: <b>${db.currentUser}</b>\n📡 Nhà mạng: <b>${telco}</b>\n💵 Mệnh giá: <b>${amt.toLocaleString()} đ</b>\n🔢 Seri: ${serial}\n📌 Pin: ${pin}`);
+
+            alert('Gửi thẻ cào thành công! Admin sẽ duyệt và cộng tiền cho bạn.');
+            switchTab('profile');
+        }
+
+        // Admin actions
+        function saveAdminTelegram() {
+            const token = document.getElementById('telegramTokenInput').value.trim();
+            const chatId = document.getElementById('telegramChatIdInput').value.trim();
+            db.telegram.token = token;
+            db.telegram.chatId = chatId;
+            saveDB();
+            alert('Lưu cấu hình Telegram thành công!');
+        }
+
+        function saveAdminBankInfo() {
+            const bankName = document.getElementById('adminBankNameInput').value.trim();
+            const stk = document.getElementById('adminBankStkInput').value.trim();
+            const owner = document.getElementById('adminBankOwnerInput').value.trim();
+
+            if(!bankName || !stk || !owner) { alert('Vui lòng điền đầy đủ thông tin ngân hàng!'); return; }
+
+            db.bankInfo = { bankName, stk, owner };
+            saveDB();
+            alert('Cập nhật thông tin ngân hàng thành công!');
+        }
+
+        function addProduct() {
+            const name = document.getElementById('newProdName').value.trim();
+            const price = parseInt(document.getElementById('newProdPrice').value);
+            if(!name || isNaN(price)) { alert('Nhập đầy đủ tên và giá sản phẩm!'); return; }
+
+            db.products.push({ id: Date.now(), name: name, price: price, keys: [] });
+            document.getElementById('newProdName').value = '';
+            document.getElementById('newProdPrice').value = '';
+            saveDB();
+            alert('Thêm sản phẩm thành công!');
+        }
+
+        function deleteProduct(id) {
+            if(!confirm('Xóa sản phẩm này?')) return;
+            db.products = db.products.filter(x => x.id !== id);
+            saveDB();
+        }
+
+        function addKeyToProduct(prodId) {
+            const choice = prompt('Chọn kiểu thêm key:\n1. Nhập danh sách key thủ công (cách nhau bởi dấu phẩy)\n2. Tự động tạo hàng loạt key ngẫu nhiên\n\nNhập "1" hoặc "2":');
+            if(!choice) return;
+
+            const prod = db.products.find(x => x.id === prodId);
+
+            if(choice === '1') {
+                const keysInput = prompt('Nhập danh sách key (ví dụ: KEY1, KEY2, KEY3):');
+                if(!keysInput) return;
+                const arr = keysInput.split(',').map(k => k.trim()).filter(k => k.length > 0);
+                prod.keys.push(...arr);
+                saveDB();
+                alert(`Đã thêm thành công ${arr.length} key thủ công!`);
+            } else if(choice === '2') {
+                const countStr = prompt('Nhập số lượng key muốn tự động tạo:', '5');
+                const count = parseInt(countStr);
+                if(isNaN(count) || count <= 0) return;
+
+                const generatedKeys = [];
+                for(let i = 0; i < count; i++) {
+                    const randomCode = 'FF-VIP-' + Math.random().toString(36).substring(2, 8).toUpperCase() + '-' + Math.floor(1000 + Math.random() * 9000);
+                    generatedKeys.push(randomCode);
+                }
+                prod.keys.push(...generatedKeys);
+                saveDB();
+                alert(`Đã tự động tạo thành công ${count} key mới vào kho!`);
+            } else {
+                alert('Lựa chọn không hợp lệ!');
+            }
+        }
+
+        function deleteKeyFromProduct(prodId, idx) {
+            const prod = db.products.find(x => x.id === prodId);
+            prod.keys.splice(idx, 1);
+            saveDB();
+        }
+
+        function approveDeposit(id) {
+            const d = db.deposits.find(x => x.id === id);
+            if(d && d.status === 'Chờ duyệt') {
+                d.status = 'Đã duyệt';
+                const u = db.users.find(x => x.username === d.username);
+                if(u) u.balance += d.amount;
+                saveDB();
+            }
+        }
+
+        function approveAllDeposits() {
+            db.deposits.forEach(d => {
+                if(d.status === 'Chờ duyệt') {
+                    d.status = 'Đã duyệt';
+                    const u = db.users.find(x => x.username === d.username);
+                    if(u) u.balance += d.amount;
+                }
+            });
+            saveDB();
+            alert('Đã duyệt tất cả yêu cầu nạp tiền & thẻ cào thành công!');
+        }
+
+        // Thông báo toàn màn hình
+        function showFullScreenAlert(msg) {
+            document.getElementById('alertMessage').innerText = msg;
+            document.getElementById('fullScreenAlert').classList.remove('hidden');
+        }
+        function closeFullScreenAlert() { document.getElementById('fullScreenAlert').classList.add('hidden'); }
+
+        function showFullScreenSuccess(msg) {
+            document.getElementById('successMessage').innerText = msg;
+            document.getElementById('fullScreenSuccess').classList.remove('hidden');
+        }
+        function closeSuccessAlert() { document.getElementById('fullScreenSuccess').classList.add('hidden'); }
+
+        // Render giao diện toàn trang
+        function renderAll() {
+            const curr = db.users.find(x => x.username === db.currentUser);
+            const authBtn = document.getElementById('authBtn');
+            const adminNavbarShortcut = document.getElementById('adminNavbarShortcut');
+            const adminMobileTabBtn = document.getElementById('adminMobileTabBtn');
+            const adminBannerShortcut = document.getElementById('adminBannerShortcut');
+            const balanceDisplay = document.getElementById('userBalanceDisplay');
+
+            if(curr) {
+                authBtn.innerText = 'Đăng Xuất';
+                authBtn.onclick = () => { db.currentUser = null; saveDB(); alert('Đăng xuất thành công!'); switchTab('shop'); };
+                balanceDisplay.innerText = curr.balance.toLocaleString();
+                if(curr.isAdmin) {
+                    adminNavbarShortcut.classList.remove('hidden');
+                    adminNavbarShortcut.classList.add('flex');
+                    adminMobileTabBtn.classList.remove('hidden');
+                    adminBannerShortcut.classList.remove('hidden');
+                } else {
+                    adminNavbarShortcut.classList.add('hidden');
+                    adminNavbarShortcut.classList.remove('flex');
+                    adminMobileTabBtn.classList.add('hidden');
+                    adminBannerShortcut.classList.add('hidden');
+                }
+            } else {
+                authBtn.innerText = 'Đăng Nhập';
+                authBtn.onclick = openAuthModal;
+                balanceDisplay.innerText = '0';
+                adminNavbarShortcut.classList.add('hidden');
+                adminNavbarShortcut.classList.remove('flex');
+                adminMobileTabBtn.classList.add('hidden');
+                adminBannerShortcut.classList.add('hidden');
+            }
+
+            // Hiển thị thông tin ngân hàng nạp tiền
+            document.getElementById('bankNameDisplay').innerText = db.bankInfo.bankName;
+            document.getElementById('bankStkDisplay').innerText = db.bankInfo.stk;
+            document.getElementById('bankOwnerDisplay').innerText = db.bankInfo.owner;
+            document.getElementById('bankContentDisplay').innerText = 'nap ' + (curr ? curr.username : 'username');
+
+            document.getElementById('telegramTokenInput').value = db.telegram.token || '';
+            document.getElementById('telegramChatIdInput').value = db.telegram.chatId || '';
+            document.getElementById('adminBankNameInput').value = db.bankInfo.bankName || '';
+            document.getElementById('adminBankStkInput').value = db.bankInfo.stk || '';
+            document.getElementById('adminBankOwnerInput').value = db.bankInfo.owner || '';
+
+            // Products list
+            document.getElementById('productList').innerHTML = db.products.map(p => `
+                <div class="glass p-6 rounded-3xl flex flex-col justify-between shadow-xl border border-purple-500/20">
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-bold text-lg text-white">${p.name}</h3>
+                            <span class="text-xs px-2.5 py-1 bg-purple-950/80 rounded-full text-purple-300 font-semibold border border-purple-500/30">Kho: ${p.keys.length} key</span>
+                        </div>
+                        <p class="text-2xl font-extrabold text-purple-400 mb-6">${p.price.toLocaleString()} đ</p>
+                    </div>
+                    <button onclick="buyProduct(${p.id})" class="w-full btn-purple text-white font-bold py-3 rounded-xl text-sm shadow-md">
+                        Mua Ngay
+                    </button>
+                </div>
+            `).join('') || '<p class="col-span-3 text-center text-purple-300">Chưa có sản phẩm nào.</p>';
+
+            // Select key activation
+            if(curr) {
+                const myKeys = db.userKeys.filter(x => x.username === curr.username && x.status === 'Chưa dùng');
+                let html = '<option value="">-- Chọn key trong kho của bạn --</option>';
+                myKeys.forEach(k => { html += `<option value="${k.keyStr}">${k.productName} - [${k.keyStr}]</option>`; });
+                document.getElementById('activateKeySelect').innerHTML = html;
+            }
+
+            // Profile
+            if(curr) {
+                document.getElementById('profileUsername').innerText = curr.username;
+                document.getElementById('profileBalance').innerText = curr.balance.toLocaleString() + ' đ';
+
+                document.getElementById('userMyKeysTable').innerHTML = db.userKeys.filter(x => x.username === curr.username).map(k => `
+                    <tr>
+                        <td class="px-4 py-3 font-medium">${k.productName}</td>
+                        <td class="px-4 py-3 font-mono text-purple-300">${k.keyStr}</td>
+                        <td class="px-4 py-3"><span class="px-2.5 py-1 rounded-full text-xs ${k.status === 'Đã dùng' ? 'bg-purple-950 text-purple-300 border border-purple-500/30' : 'bg-amber-950 text-amber-300'}">${k.status}</span></td>
+                        <td class="px-4 py-3 font-mono text-cyan-300">${k.gameId || 'Chưa unban'}</td>
+                    </tr>
+                `).join('') || '<tr><td colspan="4" class="px-4 py-4 text-center text-purple-300/60">Bạn chưa mua key nào.</td></tr>';
+
+                document.getElementById('userDepositHistoryTable').innerHTML = db.deposits.filter(x => x.username === curr.username).map(d => `
+                    <tr>
+                        <td class="px-4 py-3 font-semibold text-purple-200">${d.type}</td>
+                        <td class="px-4 py-3 font-bold text-purple-300">${d.amount.toLocaleString()} đ</td>
+                        <td class="px-4 py-3 font-mono text-xs text-purple-300/80">${d.detail}</td>
+                        <td class="px-4 py-3"><span class="px-2.5 py-1 rounded-full text-xs ${d.status === 'Đã duyệt' ? 'bg-purple-950 text-purple-300 border border-purple-500/30' : 'bg-amber-950 text-amber-300'}">${d.status}</span></td>
+                        <td class="px-4 py-3 text-xs text-purple-300/60">${d.time}</td>
+                    </tr>
+                `).join('') || '<tr><td colspan="5" class="px-4 py-4 text-center text-purple-300/60">Chưa có lịch sử nạp tiền.</td></tr>';
+            }
+
+            // Admin panel stats & tables
+            if(curr && curr.isAdmin) {
+                document.getElementById('statTotalUsers').innerText = db.users.length;
+                document.getElementById('statTotalRevenue').innerText = db.deposits.filter(x => x.status === 'Đã duyệt').reduce((a, b) => a + b.amount, 0).toLocaleString() + ' đ';
+                document.getElementById('statTotalProducts').innerText = db.products.length;
+                document.getElementById('statTotalKeys').innerText = db.products.reduce((a, b) => a + b.keys.length, 0);
+
+                document.getElementById('adminDepositTable').innerHTML = db.deposits.map(d => `
+                    <tr>
+                        <td class="px-4 py-3 font-semibold">${d.username}</td>
+                        <td class="px-4 py-3 text-purple-200">${d.type}</td>
+                        <td class="px-4 py-3 text-purple-300 font-bold">${d.amount.toLocaleString()} đ</td>
+                        <td class="px-4 py-3 font-mono text-xs text-purple-300">${d.detail}</td>
+                        <td class="px-4 py-3"><span class="px-2.5 py-1 rounded-full text-xs ${d.status === 'Đã duyệt' ? 'bg-purple-950 text-purple-300' : 'bg-amber-950 text-amber-300'}">${d.status}</span></td>
+                        <td class="px-4 py-3">
+                            ${d.status === 'Chờ duyệt' ? `<button onclick="approveDeposit(${d.id})" class="btn-amber text-slate-950 px-3 py-1 rounded-lg text-xs font-bold">Duyệt</button>` : '<span class="text-xs text-purple-400">Đã xong</span>'}
+                        </td>
+                    </tr>
+                `).join('') || '<tr><td colspan="6" class="px-4 py-4 text-center text-purple-300/60">Không có yêu cầu nạp tiền nào.</td></tr>';
+
+                document.getElementById('adminProductManageList').innerHTML = db.products.map(p => `
+                    <div class="bg-[#170c2e] p-4 rounded-2xl border border-purple-500/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h4 class="font-bold text-white">${p.name} - <span class="text-purple-300">${p.price.toLocaleString()} đ</span></h4>
+                            <p class="text-xs text-purple-300/70 mt-1">Số lượng key tồn kho: <span class="text-amber-300 font-bold">${p.keys.length}</span></p>
+                            <div class="flex flex-wrap gap-1.5 mt-2">
+                                ${p.keys.map((k, i) => `
+                                    <span class="bg-purple-950/80 text-xs px-2.5 py-1 rounded-lg font-mono text-purple-200 border border-purple-500/30 flex items-center gap-1">
+                                        ${k} <button onclick="deleteKeyFromProduct(${p.id}, ${i})" class="text-red-400 hover:text-red-300 font-bold ml-1">&times;</button>
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="addKeyToProduct(${p.id})" class="btn-purple text-white px-3 py-2 rounded-xl text-xs font-bold">Thêm / Tạo Key</button>
+                            <button onclick="deleteProduct(${p.id})" class="bg-red-600/80 hover:bg-red-600 text-white px-3 py-2 rounded-xl text-xs font-bold transition">Xóa Gói</button>
+                        </div>
+                    </div>
+                `).join('') || '<p class="text-purple-300/60 text-sm">Chưa có sản phẩm nào.</p>';
+
+                document.getElementById('adminAllUsersTable').innerHTML = db.users.map(u => `
+                    <tr>
+                        <td class="px-4 py-3 font-semibold text-white">${u.username}</td>
+                        <td class="px-4 py-3 font-mono text-xs text-purple-300">${u.password}</td>
+                        <td class="px-4 py-3"><span class="px-2.5 py-1 rounded-full text-xs ${u.isAdmin ? 'bg-amber-950 text-amber-300 border border-amber-500/30 font-bold' : 'bg-purple-950/60 text-purple-300'}">${u.isAdmin ? 'Admin' : 'Thành Viên'}</span></td>
+                        <td class="px-4 py-3 text-purple-300 font-bold">${u.balance.toLocaleString()} đ</td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        renderAll();
+    </script>
 </body>
 </html>
