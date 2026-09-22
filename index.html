@@ -3,226 +3,1099 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINH THỊNH CHỌC CHÓ</title>
-    <!-- Font Awesome Icons -->
+    <title>Hệ Thống Unban Free Fire - Ultimate Edition</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Nunito', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: radial-gradient(circle at 50% 10%, #2e1065 0%, #0f0728 50%, #05020c 100%); 
+            color: #f3e8ff; 
+            overflow-x: hidden;
+            padding-bottom: 90px; 
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: #334155;
         }
 
-        .card {
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-            max-width: 550px;
-            width: 100%;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        .glass { 
+            background: rgba(45, 27, 84, 0.4); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(192, 132, 252, 0.25); 
+            box-shadow: 0 8px 32px 0 rgba(15, 5, 36, 0.5);
         }
 
-        /* Dog Icon Banner Container */
-        .dog-wrapper {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            background: #fff7ed;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 24px;
-            border: 4px solid #ffedd5;
+        .glass-card {
+            background: linear-gradient(135deg, rgba(67, 35, 122, 0.45) 0%, rgba(30, 14, 61, 0.6) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(216, 180, 254, 0.8);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(168, 85, 247, 0.5);
         }
 
-        .dog-icon {
-            font-size: 70px;
-            color: #f97316;
-            animation: bounce 2s infinite ease-in-out;
-        }
-
-        /* Wrench icon badge */
-        .tool-badge {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background: #0ea5e9;
-            color: #fff;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            border: 3px solid #fff;
-            animation: rotate 4s infinite linear;
-        }
-
-        h1 {
-            font-size: 28px;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        p.description {
-            font-size: 16px;
-            color: #64748b;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* Progress Bar */
-        .progress-box {
-            margin-bottom: 30px;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            font-weight: 700;
-            color: #475569;
-            margin-bottom: 8px;
-        }
-
-        .progress-bar-container {
-            width: 100%;
-            height: 14px;
-            background-color: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 75%;
-            background: linear-gradient(90deg, #f97316, #fb923c);
-            border-radius: 10px;
-            position: relative;
-            animation: progress-stripe 1.5s linear infinite;
-        }
-
-        /* Contact / Social Links */
-        .contact-info {
-            border-top: 1px solid #f1f5f9;
-            padding-top: 20px;
-            margin-top: 10px;
-        }
-
-        .contact-info p {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 12px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #f8fafc;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
+        .btn-purple {
+            background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
             transition: all 0.3s ease;
-            font-size: 16px;
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.5);
+        }
+        .btn-purple:hover {
+            background: linear-gradient(135deg, #c084fc 0%, #9333ea 100%);
+            box-shadow: 0 6px 25px rgba(192, 132, 252, 0.8);
+            transform: translateY(-2px);
         }
 
-        .social-links a:hover {
-            background: #f97316;
-            color: #ffffff;
-            transform: translateY(-3px);
-            border-color: #f97316;
+        .btn-amber {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+        .btn-amber:hover {
+            background: linear-gradient(135deg, #fbbf24 0%, #b45309 100%);
+            transform: translateY(-2px);
         }
 
-        /* Animations */
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+        /* HIỆU ỨNG NHÚNG NHẢY & LƠ LỬNG ICON */
+        @keyframes floating {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(3deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animate-float {
+            animation: floating 3s ease-in-out infinite;
         }
 
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.6)); }
+            50% { filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.9)); }
+        }
+        .animate-glow {
+            animation: pulse-glow 2s infinite;
+        }
+
+        /* HIỆU ỨNG ĐĨA NHẠC XOAY TRÒN */
+        @keyframes spin-slow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 8s linear infinite;
+        }
+
+        /* TUYẾT RƠI */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            background: #e9d5ff;
+            border-radius: 50%;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10px) translateX(0); }
+            50% { transform: translateY(50vh) translateX(15px); }
+            100% { transform: translateY(105vh) translateX(-15px); }
         }
     </style>
 </head>
-<body>
+<body class="flex flex-col relative">
 
-    <div class="card">
-        <!-- Dog Icon Container -->
-        <div class="dog-wrapper">
-            <i class="fa-solid fa-dog dog-icon"></i>
-            <div class="tool-badge">
-                <i class="fa-solid fa-wrench"></i>
+    <div id="snow-container"></div>
+
+    <!-- AUDIO TRÌNH PHÁT NHẠC: NƠI NÀY CÓ NHUA -->
+    <audio id="bgMusic" loop>
+        <source src="https://audio.jukehost.co.uk/sample-noi-nay-co-nhau.mp3" type="audio/mp3">
+        <!-- Thay link nhạc trực tuyến khác nếu muốn -->
+    </audio>
+
+    <!-- WIDGET TRÌNH PHÁT NHẠC NỔI GÓC DƯỚI TRÁI -->
+    <div class="fixed bottom-24 left-4 z-50 glass px-4 py-3 rounded-2xl border border-purple-500/40 shadow-2xl flex items-center space-x-3 bg-slate-950/80 backdrop-blur-xl">
+        <div id="discIcon" class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center border border-purple-300/40 shadow-md">
+            <i class="fa-solid fa-compact-disc text-white text-lg animate-float"></i>
+        </div>
+        <div>
+            <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-music text-purple-400 animate-pulse"></i> Nơi Này Có Nhau
+            </div>
+            <div class="text-[10px] text-purple-300/70">Background Music</div>
+        </div>
+        <button onclick="togglePlayMusic()" id="musicToggleBtn" class="w-9 h-9 rounded-xl btn-purple text-white flex items-center justify-center text-xs shadow-lg transition">
+            <i id="musicIconState" class="fa-solid fa-play"></i>
+        </button>
+    </div>
+
+    <!-- MODAL THÔNG BÁO LỖI -->
+    <div id="fullScreenAlert" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center hidden px-4">
+        <div class="glass border border-red-500/50 p-8 rounded-3xl max-w-md text-center shadow-2xl bg-slate-950/90 w-full animate-float">
+            <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-500/40">
+                <i class="fa-solid fa-triangle-exclamation text-3xl text-red-400 animate-bounce"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-red-400 mb-2">Thất Bại!</h2>
+            <p id="alertMessage" class="text-red-200 mb-6 text-sm">Tài khoản không đủ tiền hoặc thao tác lỗi!</p>
+            <button onclick="closeFullScreenAlert()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-2xl transition shadow-lg text-sm w-full">Đóng Lại</button>
+        </div>
+    </div>
+
+    <!-- MODAL THÔNG BÁO THÀNH CÔNG -->
+    <div id="fullScreenSuccess" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center hidden px-4">
+        <div class="glass border border-purple-500/50 p-8 rounded-3xl max-w-md text-center shadow-2xl bg-slate-950/90 w-full animate-float">
+            <div class="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-purple-500/40">
+                <i class="fa-solid fa-check text-3xl text-purple-300 animate-bounce"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-purple-300 mb-2">Thành Công Tuyệt Đối!</h2>
+            <p id="successMessage" class="text-purple-200 mb-6 text-sm">Thao tác xử lý hoàn tất!</p>
+            <button onclick="closeSuccessAlert()" class="btn-purple text-white font-bold py-3 px-6 rounded-2xl text-sm w-full shadow-lg">Xác Nhận</button>
+        </div>
+    </div>
+
+    <!-- NAVBAR PC -->
+    <nav class="glass sticky top-0 z-40 px-6 py-3.5 flex justify-between items-center shadow-2xl border-b border-purple-500/30">
+        <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchTab('shop')">
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center border border-purple-300/40 shadow-lg animate-glow">
+                <i class="fa-solid fa-shield-cat text-white text-xl animate-float"></i>
+            </div>
+            <div>
+                <span class="text-lg font-extrabold tracking-wider bg-gradient-to-r from-purple-200 via-pink-200 to-white bg-clip-text text-transparent">UNBAN FF VIP</span>
+                <span class="block text-[10px] text-purple-300/70 font-semibold tracking-widest">CLOUD REALTIME</span>
+            </div>
+        </div>
+        <div class="hidden md:flex space-x-2 text-sm font-medium items-center">
+            <button onclick="switchTab('shop')" class="px-4 py-2 rounded-xl transition nav-btn text-purple-200 hover:text-white hover:bg-purple-900/30 flex items-center gap-2" data-target="shop">
+                <i class="fa-solid fa-store animate-float"></i> Sản Phẩm
+            </button>
+            <button onclick="switchTab('deposit')" class="px-4 py-2 rounded-xl transition nav-btn text-purple-200 hover:text-white hover:bg-purple-900/30 flex items-center gap-2" data-target="deposit">
+                <i class="fa-solid fa-wallet animate-float"></i> Nạp Tiền
+            </button>
+            <button onclick="switchTab('profile')" class="px-4 py-2 rounded-xl transition nav-btn text-purple-200 hover:text-white hover:bg-purple-900/30 flex items-center gap-2" data-target="profile">
+                <i class="fa-solid fa-id-card animate-float"></i> Hồ Sơ
+            </button>
+            <button onclick="switchTab('support')" class="px-4 py-2 rounded-xl transition nav-btn text-purple-200 hover:text-white hover:bg-purple-900/30 flex items-center gap-2" data-target="support">
+                <i class="fa-solid fa-headset animate-float"></i> Hỗ Trợ
+            </button>
+            <button id="adminNavbarShortcut" onclick="switchTab('admin')" class="btn-amber text-slate-950 text-xs px-3.5 py-2 rounded-xl font-extrabold hidden items-center gap-1.5 shadow-lg">
+                <i class="fa-solid fa-gauge-high animate-bounce"></i> Admin Panel
+            </button>
+        </div>
+        <div class="flex items-center space-x-3">
+            <div class="glass px-4 py-2 rounded-2xl text-xs font-bold text-purple-200 border border-purple-400/30 flex items-center gap-2 shadow-inner">
+                <i class="fa-solid fa-coins text-amber-400 animate-float text-sm"></i> <span id="userBalanceDisplay">0</span> đ
+            </div>
+            <button onclick="openAuthModal()" id="authBtn" class="btn-purple text-white text-xs px-5 py-2.5 rounded-2xl font-bold flex items-center gap-2 shadow-lg">
+                <i class="fa-solid fa-right-to-bracket animate-float"></i> Đăng Nhập
+            </button>
+        </div>
+    </nav>
+
+    <!-- NAVBAR MOBILE BOTTOM -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 glass z-40 border-t border-purple-500/30 px-2 py-2.5 flex justify-around items-center bg-slate-950/90 backdrop-blur-xl">
+        <button onclick="switchTab('shop')" class="flex flex-col items-center text-purple-300 nav-btn-mob py-1 px-3 rounded-2xl" data-target="shop">
+            <i class="fa-solid fa-store text-lg animate-float"></i>
+            <span class="text-[10px] mt-1 font-semibold">Shop</span>
+        </button>
+        <button onclick="switchTab('deposit')" class="flex flex-col items-center text-purple-200/70 nav-btn-mob py-1 px-3 rounded-2xl" data-target="deposit">
+            <i class="fa-solid fa-wallet text-lg animate-float"></i>
+            <span class="text-[10px] mt-1 font-semibold">Nạp Tiền</span>
+        </button>
+        <button onclick="switchTab('profile')" class="flex flex-col items-center text-purple-200/70 nav-btn-mob py-1 px-3 rounded-2xl" data-target="profile">
+            <i class="fa-solid fa-user-gear text-lg animate-float"></i>
+            <span class="text-[10px] mt-1 font-semibold">Hồ Sơ</span>
+        </button>
+        <button onclick="switchTab('support')" class="flex flex-col items-center text-purple-200/70 nav-btn-mob py-1 px-3 rounded-2xl" data-target="support">
+            <i class="fa-solid fa-headset text-lg animate-float"></i>
+            <span class="text-[10px] mt-1 font-semibold">Hỗ Trợ</span>
+        </button>
+        <button onclick="toggleMobileMenu()" class="flex flex-col items-center text-purple-200/70 py-1 px-3 rounded-2xl">
+            <i class="fa-solid fa-bars text-lg text-amber-400 animate-pulse"></i>
+            <span class="text-[10px] mt-1 font-bold text-amber-300">Menu</span>
+        </button>
+        <button id="adminMobileTabBtn" onclick="switchTab('admin')" class="flex flex-col items-center text-amber-400 nav-btn-mob py-1 px-3 rounded-2xl hidden" data-target="admin">
+            <i class="fa-solid fa-shield-halved text-lg animate-bounce"></i>
+            <span class="text-[10px] mt-1 font-bold">Admin</span>
+        </button>
+    </div>
+
+    <!-- MENU DROPDOWN MOBILE -->
+    <div id="mobileDropdownMenu" class="md:hidden fixed bottom-20 right-4 z-50 glass bg-slate-950/95 border border-purple-500/40 rounded-3xl p-3 shadow-2xl hidden flex-col space-y-2 w-52">
+        <button onclick="switchTab('shop'); toggleMobileMenu();" class="text-left px-3.5 py-2.5 rounded-2xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-3 font-semibold"><i class="fa-solid fa-store text-purple-400"></i> Cửa Hàng</button>
+        <button onclick="switchTab('deposit'); toggleMobileMenu();" class="text-left px-3.5 py-2.5 rounded-2xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-3 font-semibold"><i class="fa-solid fa-wallet text-purple-400"></i> Nạp Tiền</button>
+        <button onclick="switchTab('profile'); toggleMobileMenu();" class="text-left px-3.5 py-2.5 rounded-2xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-3 font-semibold"><i class="fa-solid fa-id-card text-purple-400"></i> Kho Key</button>
+        <button onclick="switchTab('support'); toggleMobileMenu();" class="text-left px-3.5 py-2.5 rounded-2xl text-xs text-purple-200 hover:bg-purple-900/40 flex items-center gap-3 font-semibold"><i class="fa-solid fa-headset text-purple-400"></i> Hỗ Trợ 24/7</button>
+    </div>
+
+    <!-- CONTAINER CHÍNH -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl relative z-10">
+
+        <!-- TAB: SHOP & KÍCH HOẠT -->
+        <div id="tab-shop" class="tab-content">
+            <div id="adminBannerShortcut" class="hidden mb-8 p-5 rounded-3xl bg-gradient-to-r from-amber-950/70 via-purple-950/60 to-slate-950 border border-amber-500/40 flex justify-between items-center shadow-2xl animate-glow">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-amber-500/20 rounded-2xl flex items-center justify-center border border-amber-500/40">
+                        <i class="fa-solid fa-user-shield text-amber-400 text-2xl animate-float"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-amber-300 text-sm md:text-base">Quản Trị Viên (Admin Active Mode)</h4>
+                        <p class="text-xs text-amber-200/70">Hệ thống lưu trữ đồng bộ Cloud Firestore Realtime hoạt động hoàn hảo.</p>
+                    </div>
+                </div>
+                <button onclick="switchTab('admin')" class="btn-amber text-slate-950 font-extrabold px-5 py-2.5 rounded-2xl text-xs flex items-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-screwdriver-wrench animate-spin"></i> Vào Bảng Quản Trị
+                </button>
+            </div>
+
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-900/40 border border-purple-500/30 text-purple-300 text-xs font-semibold mb-3">
+                    <i class="fa-solid fa-fire text-amber-400 animate-bounce"></i> Hệ Thống Unban Free Fire Bảo Mật Cao
+                </div>
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-3 text-white tracking-tight">Cửa Hàng Mua & Kích Hoạt Key</h1>
+                <p class="text-purple-200/70 text-sm md:text-base max-w-xl mx-auto">Sở hữu key bản quyền chất lượng cao, dán ID thiết bị để mở khóa tài khoản Free Fire mượt mà lập tức.</p>
+            </div>
+
+            <!-- Danh sách sản phẩm -->
+            <div id="productList" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <!-- Render bằng JavaScript -->
+            </div>
+
+            <!-- Khu vực kích hoạt key -->
+            <div class="glass p-8 md:p-10 rounded-3xl max-w-2xl mx-auto shadow-2xl border border-purple-500/40 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                <h2 class="text-xl md:text-2xl font-bold mb-6 flex items-center text-purple-200">
+                    <i class="fa-solid fa-key text-purple-400 mr-3 text-2xl animate-float"></i> Kích Hoạt Key Cho ID Gem
+                </h2>
+                <div class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-300 mb-2">Chọn Key Sẵn Có Trong Kho</label>
+                        <select id="activateKeySelect" class="w-full bg-[#170c2e] border border-purple-500/40 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-purple-400 text-white shadow-inner">
+                            <option value="">-- Bạn chưa có key nào trong kho --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-300 mb-2">Nhập ID Gem (ID Game Free Fire)</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-purple-400">
+                                <i class="fa-solid fa-gamepad animate-float"></i>
+                            </span>
+                            <input type="text" id="gameIdInput" placeholder="Ví dụ: 987654321" class="w-full bg-[#170c2e] border border-purple-500/40 rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none focus:border-purple-400 text-white shadow-inner">
+                        </div>
+                    </div>
+                    <button onclick="handleActivateKey()" class="w-full btn-purple text-white font-extrabold py-4 rounded-2xl transition shadow-xl text-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shield-halved animate-float"></i> Xác Nhận Kích Hoạt Unban Ngay
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- Heading & Subtext -->
-        <h1>web đóng có thành phần scam </h1>
-        <p class="description">
-            Chú cún thông minh của chúng tôi đang tích cực nâng cấp trang web để đem lại trải nghiệm tốt nhất cho bạn. Rất mong bạn thông cảm và quay lại sau nhé! Woof! 🐾
-        </p>
+        <!-- TAB: NẠP TIỀN -->
+        <div id="tab-deposit" class="tab-content hidden">
+            <div class="max-w-2xl mx-auto space-y-8">
+                <!-- Chuyển Khoản Ngân Hàng -->
+                <div class="glass p-8 md:p-10 rounded-3xl shadow-2xl border border-purple-500/40">
+                    <h2 class="text-2xl font-bold mb-6 text-center text-white flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-building-columns text-purple-400 animate-float text-3xl"></i> Nạp Tiền Chuyển Khoản
+                    </h2>
+                    
+                    <div class="bg-[#170c2e]/90 border border-purple-500/30 rounded-2xl p-6 mb-6 space-y-4 shadow-inner">
+                        <div class="flex justify-between items-center border-b border-purple-900/40 pb-3">
+                            <span class="text-xs text-purple-300 font-medium">Tên Ngân Hàng:</span>
+                            <span id="bankNameDisplay" class="font-bold text-white text-sm">ZALO PAY</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-purple-900/40 pb-3">
+                            <span class="text-xs text-purple-300 font-medium">Số Tài Khoản:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="bankStkDisplay" class="font-mono font-extrabold text-purple-300 text-base">0909319453</span>
+                                <button onclick="copyToClipboard('bankStkDisplay')" class="text-xs bg-purple-900/50 hover:bg-purple-800 text-purple-200 px-3 py-1.5 rounded-xl transition flex items-center gap-1 font-semibold"><i class="fa-solid fa-copy"></i> Sao chép</button>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-purple-900/40 pb-3">
+                            <span class="text-xs text-purple-300 font-medium">Chủ Tài Khoản:</span>
+                            <span id="bankOwnerDisplay" class="font-bold text-white text-sm">TRAN NHAT KHANG</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-purple-300 font-medium">Nội Dung CK:</span>
+                            <div class="flex items-center gap-2">
+                                <span id="bankContentDisplay" class="font-mono font-extrabold text-amber-300 text-sm">nap [username]</span>
+                                <button onclick="copyToClipboard('bankContentDisplay')" class="text-xs bg-purple-900/50 hover:bg-purple-800 text-purple-200 px-3 py-1.5 rounded-xl transition flex items-center gap-1 font-semibold"><i class="fa-solid fa-copy"></i> Sao chép</button>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Progress Bar -->
-        <div class="progress-box">
-            <div class="progress-label">
-                <span>Tiến độ cập nhật</span>
-                <span>75%</span>
-            </div>
-            <div class="progress-bar-container">
-                <div class="progress-bar-fill"></div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-purple-300 mb-2">Số Tiền Đã Chuyển (VNĐ)</label>
+                            <input type="number" id="depositAmount" placeholder="Nhập số tiền đã chuyển..." class="w-full bg-[#170c2e] border border-purple-500/40 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-purple-400 text-white shadow-inner">
+                        </div>
+                        <button onclick="requestDeposit()" class="w-full btn-purple text-white font-extrabold py-4 rounded-2xl transition shadow-xl text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane animate-float"></i> Gửi Yêu Cầu Duyệt Tiền
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thẻ Cào -->
+                <div class="glass p-8 md:p-10 rounded-3xl shadow-2xl border border-amber-500/40">
+                    <h2 class="text-2xl font-bold mb-6 text-center text-amber-300 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-sim-card text-amber-400 animate-float text-3xl"></i> Nạp Thẻ Cào Điện Thoại
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-purple-300 mb-2">Nhà Mạng</label>
+                                <select id="cardTelco" class="w-full bg-[#170c2e] border border-purple-500/40 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-purple-400 text-white">
+                                    <option value="Viettel">Viettel</option>
+                                    <option value="Mobifone">Mobifone</option>
+                                    <option value="Vinaphone">Vinaphone</option>
+                                    <option value="Vietnamobile">Vietnamobile</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-purple-300 mb-2">Mệnh Giá</label>
+                                <select id="cardAmount" class="w-full bg-[#170c2e] border border-purple-500/40 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-purple-400 text-white">
+                                    <option value="10000">10,000 đ</option>
+                                    <option value="20000">20,000 đ</option>
+                                    <option value="50000">50,000 đ</option>
+                                    <option value="100000">100,000 đ</option>
+                                    <option value="200000">200,000 đ</option>
+                                    <option value="500000">500,000 đ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-purple-300 mb-2">Mã Thẻ Cào</label>
+                            <input type="text" id="cardPin" placeholder="Nhập mã thẻ cào..." class="w-full bg-[#170c2e] border border-purple-500/40 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-purple-400 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-purple-300 mb-2">Số Seri Thẻ</label>
+                            <input type="text" id="cardSerial" placeholder="Nhập số seri..." class="w-full bg-[#170c2e] border border-purple-500/40 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:border-purple-400 text-white">
+                        </div>
+                        <button onclick="requestCardDeposit()" class="w-full btn-amber text-slate-950 font-extrabold py-4 rounded-2xl transition shadow-xl text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bolt animate-float"></i> Gửi Thẻ Cào (Admin Duyệt Nhanh)
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Footer / Contact Info -->
-        <div class="contact-info">
-            <p>Nếu bạn cần hỗ trợ gấp, vui lòng liên hệ với chúng tôi qua:</p>
-            <div class="social-links">
-                <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="mailto:support@example.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
-                <a href="tel:0123456789" title="Hotline"><i class="fa-solid fa-phone"></i></a>
+        <!-- TAB: HỒ SƠ -->
+        <div id="tab-profile" class="tab-content hidden">
+            <div class="max-w-4xl mx-auto glass p-8 md:p-10 rounded-3xl shadow-2xl border border-purple-500/40">
+                <h2 class="text-2xl font-bold mb-6 text-white flex items-center gap-3">
+                    <i class="fa-solid fa-user-gear text-purple-400 animate-float text-3xl"></i> Hồ Sơ Thành Viên & Kho Key
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-[#170c2e]/70 p-6 rounded-2xl border border-purple-500/30 shadow-inner flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-600/20 rounded-2xl flex items-center justify-center border border-purple-400/30">
+                            <i class="fa-solid fa-user text-purple-300 text-xl animate-float"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-purple-300 font-medium">Tên Tài Khoản</p>
+                            <p id="profileUsername" class="text-lg font-bold text-white">-</p>
+                        </div>
+                    </div>
+                    <div class="bg-[#170c2e]/70 p-6 rounded-2xl border border-purple-500/30 shadow-inner flex items-center gap-4">
+                        <div class="w-12 h-12 bg-amber-500/20 rounded-2xl flex items-center justify-center border border-amber-400/30">
+                            <i class="fa-solid fa-wallet text-amber-400 text-xl animate-float"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-purple-300 font-medium">Số Dư Khả Dụng</p>
+                            <p id="profileBalance" class="text-lg font-extrabold text-amber-300">0 đ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold mb-4 text-purple-200 flex items-center gap-2">
+                    <i class="fa-solid fa-box-archive text-purple-400"></i> Kho Key Đã Mua Của Bạn
+                </h3>
+                <div class="overflow-x-auto mb-8 rounded-2xl border border-purple-500/30 shadow-lg">
+                    <table class="w-full text-left text-sm text-purple-100">
+                        <thead class="bg-purple-950/80 text-xs uppercase text-purple-300">
+                            <tr>
+                                <th class="px-5 py-3.5">Sản Phẩm</th>
+                                <th class="px-5 py-3.5">Mã Key</th>
+                                <th class="px-5 py-3.5">Trạng Thái</th>
+                                <th class="px-5 py-3.5">ID Gem Unban</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userMyKeysTable" class="divide-y divide-purple-900/40"></tbody>
+                    </table>
+                </div>
+
+                <h3 class="text-lg font-bold mb-4 text-purple-200 flex items-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left text-purple-400"></i> Lịch Sử Nạp Tiền
+                </h3>
+                <div class="overflow-x-auto rounded-2xl border border-purple-500/30 shadow-lg">
+                    <table class="w-full text-left text-sm text-purple-100">
+                        <thead class="bg-purple-950/80 text-xs uppercase text-purple-300">
+                            <tr>
+                                <th class="px-5 py-3.5">Hình Thức</th>
+                                <th class="px-5 py-3.5">Số Tiền</th>
+                                <th class="px-5 py-3.5">Chi Tiết</th>
+                                <th class="px-5 py-3.5">Trạng Thái</th>
+                                <th class="px-5 py-3.5">Thời Gian</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userDepositHistoryTable" class="divide-y divide-purple-900/40"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: HỖ TRỢ -->
+        <div id="tab-support" class="tab-content hidden">
+            <div class="max-w-xl mx-auto glass p-8 md:p-12 rounded-3xl text-center shadow-2xl border border-purple-500/40">
+                <div class="w-20 h-20 bg-purple-600/20 rounded-3xl flex items-center justify-center mx-auto mb-6 border border-purple-400/40 animate-glow">
+                    <i class="fa-solid fa-headset text-4xl text-purple-300 animate-float"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold mb-3 text-white">Hỗ Trợ Trực Tuyến 24/7</h2>
+                <p class="text-purple-200/70 text-sm md:text-base mb-8">Mọi thắc mắc về key bản quyền hoặc vấn đề nạp tiền, đội ngũ CSKH luôn sẵn sàng giải đáp.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://t.me/" target="_blank" class="btn-purple px-8 py-4 rounded-2xl font-bold text-sm text-white flex items-center justify-center gap-3 shadow-xl">
+                        <i class="fa-brands fa-telegram text-xl animate-float"></i> Telegram Admin
+                    </a>
+                    <a href="https://zalo.me/" target="_blank" class="bg-purple-900/80 hover:bg-purple-800 px-8 py-4 rounded-2xl font-bold text-sm text-white transition flex items-center justify-center gap-3 shadow-xl border border-purple-500/30">
+                        <i class="fa-solid fa-comment-sms text-xl animate-float"></i> Zalo Hỗ Trợ
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: ADMIN PANEL -->
+        <div id="tab-admin" class="tab-content hidden">
+            <div class="glass p-8 md:p-10 rounded-3xl shadow-2xl border border-amber-500/40 mb-8">
+                <div class="flex justify-between items-center mb-8 border-b border-purple-500/30 pb-4">
+                    <h2 class="text-2xl md:text-3xl font-bold text-amber-300 flex items-center gap-3">
+                        <i class="fa-solid fa-gauge text-amber-400 animate-float text-3xl"></i> Bảng Điều Hành Admin Panel
+                    </h2>
+                    <button onclick="switchTab('shop')" class="bg-slate-800 hover:bg-slate-700 text-purple-200 px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> Về Shop
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div class="glass-card p-5 rounded-2xl">
+                        <p class="text-xs text-purple-300 font-medium">Tổng Thành Viên</p>
+                        <p id="statTotalUsers" class="text-3xl font-extrabold text-white mt-1">0</p>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl">
+                        <p class="text-xs text-purple-300 font-medium">Tổng Doanh Thu</p>
+                        <p id="statTotalRevenue" class="text-3xl font-extrabold text-purple-400 mt-1">0 đ</p>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl">
+                        <p class="text-xs text-purple-300 font-medium">Sản Phẩm Key</p>
+                        <p id="statTotalProducts" class="text-3xl font-extrabold text-amber-300 mt-1">0</p>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl">
+                        <p class="text-xs text-purple-300 font-medium">Tổng Key Tồn Kho</p>
+                        <p id="statTotalKeys" class="text-3xl font-extrabold text-sky-300 mt-1">0</p>
+                    </div>
+                </div>
+
+                <!-- Cấu hình Telegram -->
+                <div class="bg-[#170c2e]/80 p-6 md:p-8 rounded-3xl border border-purple-500/30 mb-8 shadow-inner">
+                    <h3 class="text-lg font-bold mb-4 text-amber-300 flex items-center gap-2">
+                        <i class="fa-brands fa-telegram text-2xl animate-float"></i> Cấu Hình Bot Telegram Thông Báo
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <input type="text" id="telegramTokenInput" placeholder="Nhập Bot Token (VD: 123456:ABC...)" class="bg-[#0f0728] border border-purple-500/40 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-400">
+                        <input type="text" id="telegramChatIdInput" placeholder="Nhập Chat ID Box (VD: -100...)" class="bg-[#0f0728] border border-purple-500/40 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-400">
+                    </div>
+                    <button onclick="saveAdminTelegram()" class="btn-amber text-slate-950 font-extrabold px-6 py-3 rounded-2xl text-sm shadow-lg flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> Lưu Cấu Hình Telegram
+                    </button>
+                </div>
+
+                <!-- Cài đặt Ngân hàng -->
+                <div class="bg-[#170c2e]/80 p-6 md:p-8 rounded-3xl border border-purple-500/30 mb-8 shadow-inner">
+                    <h3 class="text-lg font-bold mb-4 text-amber-300 flex items-center gap-2">
+                        <i class="fa-solid fa-building-columns text-2xl animate-float"></i> Cài Đặt Thông Tin Ngân Hàng Nạp Tiền
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-purple-300 mb-2">Tên Ngân Hàng</label>
+                            <input type="text" id="adminBankNameInput" class="w-full bg-[#0f0728] border border-purple-500/40 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-purple-300 mb-2">Số Tài Khoản</label>
+                            <input type="text" id="adminBankStkInput" class="w-full bg-[#0f0728] border border-purple-500/40 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-purple-300 mb-2">Chủ Tài Khoản</label>
+                            <input type="text" id="adminBankOwnerInput" class="w-full bg-[#0f0728] border border-purple-500/40 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-400">
+                        </div>
+                    </div>
+                    <button onclick="saveAdminBankInfo()" class="btn-purple font-extrabold px-6 py-3 rounded-2xl text-sm text-white shadow-lg flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> Lưu Thông Tin Ngân Hàng
+                    </button>
+                </div>
+
+                <!-- Duyệt nạp tiền -->
+                <div class="bg-[#170c2e]/80 p-6 md:p-8 rounded-3xl border border-purple-500/30 mb-8 shadow-inner">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-amber-300 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-dollar-to-slot animate-float"></i> Duyệt Yêu Cầu Nạp Tiền Chờ Xử Lý
+                        </h3>
+                        <button onclick="approveAllDeposits()" class="btn-amber text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs shadow-md">Duyệt Tất Cả</button>
+                    </div>
+                    <div class="overflow-x-auto rounded-2xl border border-purple-500/20">
+                        <table class="w-full text-left text-sm text-purple-100">
+                            <thead class="bg-purple-950/80 text-xs uppercase text-purple-300">
+                                <tr>
+                                    <th class="px-4 py-3">Người Dùng</th>
+                                    <th class="px-4 py-3">Hình Thức</th>
+                                    <th class="px-4 py-3">Số Tiền</th>
+                                    <th class="px-4 py-3">Chi Tiết</th>
+                                    <th class="px-4 py-3">Trạng Thái</th>
+                                    <th class="px-4 py-3">Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminDepositTable" class="divide-y divide-purple-900/40"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Quản lý sản phẩm -->
+                <div class="bg-[#170c2e]/80 p-6 md:p-8 rounded-3xl border border-purple-500/30 mb-8 shadow-inner">
+                    <h3 class="text-lg font-bold mb-4 text-amber-300 flex items-center gap-2">
+                        <i class="fa-solid fa-box-open animate-float"></i> Quản Lý Sản Phẩm & Thêm Key Bản Quyền
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <input type="text" id="newProdName" placeholder="Tên gói sản phẩm..." class="bg-[#0f0728] border border-purple-500/40 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-400">
+                        <input type="number" id="newProdPrice" placeholder="Giá tiền (VNĐ)..." class="bg-[#0f0728] border border-purple-500/40 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-purple-400">
+                        <button onclick="addProduct()" class="btn-purple font-extrabold py-3 rounded-2xl text-sm text-white shadow-lg">Thêm Gói Mới</button>
+                    </div>
+                    <div id="adminProductManageList" class="space-y-4"></div>
+                </div>
+
+                <!-- Danh sách thành viên -->
+                <div class="bg-[#170c2e]/80 p-6 md:p-8 rounded-3xl border border-purple-500/30 shadow-inner">
+                    <h3 class="text-lg font-bold mb-4 text-amber-300 flex items-center gap-2">
+                        <i class="fa-solid fa-users animate-float"></i> Quản Lý Thành Viên Hệ Thống
+                    </h3>
+                    <div class="overflow-x-auto rounded-2xl border border-purple-500/20">
+                        <table class="w-full text-left text-sm text-purple-100">
+                            <thead class="bg-purple-950/80 text-xs uppercase text-purple-300">
+                                <tr>
+                                    <th class="px-4 py-3">Tài Khoản</th>
+                                    <th class="px-4 py-3">Mật Khẩu</th>
+                                    <th class="px-4 py-3">Quyền Hạn</th>
+                                    <th class="px-4 py-3">Số Dư</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminAllUsersTable" class="divide-y divide-purple-900/40"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODAL ĐĂNG NHẬP / ĐĂNG KÝ -->
+    <div id="authModal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center hidden px-4">
+        <div class="glass p-8 md:p-10 rounded-3xl w-full max-w-md relative shadow-2xl border border-purple-500/50 bg-slate-950/95 animate-float">
+            <button onclick="closeAuthModal()" class="absolute top-5 right-5 text-purple-300 hover:text-white transition w-8 h-8 bg-purple-900/40 rounded-full flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h2 id="authTitle" class="text-2xl font-extrabold mb-6 text-center text-white flex items-center justify-center gap-2">
+                <i class="fa-solid fa-circle-user text-purple-400"></i> Đăng Nhập Tài Khoản
+            </h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-purple-300 mb-2">Tên Đăng Nhập</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-purple-400"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" id="authUsername" placeholder="Nhập tên đăng nhập..." class="w-full bg-[#170c2e] border border-purple-500/40 rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none focus:border-purple-400 text-white shadow-inner">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-purple-300 mb-2">Mật Khẩu</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-purple-400"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" id="authPassword" placeholder="Nhập mật khẩu..." class="w-full bg-[#170c2e] border border-purple-500/40 rounded-2xl pl-11 pr-4 py-3.5 text-sm focus:outline-none focus:border-purple-400 text-white shadow-inner">
+                    </div>
+                </div>
+                <button onclick="handleAuth()" id="authActionBtn" class="w-full btn-purple text-white font-extrabold py-4 rounded-2xl shadow-xl text-sm mt-2 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-arrow-right-to-bracket animate-float"></i> Đăng Nhập
+                </button>
+                <div class="text-center mt-4">
+                    <button onclick="toggleAuthMode()" id="authSwitchModeBtn" class="text-xs text-purple-300 hover:text-white underline font-semibold">Chưa có tài khoản? Đăng ký ngay</button>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- FOOTER -->
+    <footer class="glass py-6 text-center text-xs text-purple-300/70 mt-auto relative z-10 border-t border-purple-500/30">
+        &copy; 2026 Unban Free Fire System. Ultimate Edition with Cloud Firestore Realtime & Telegram Notifications.
+    </footer>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "YOUR_FIREBASE_API_KEY",
+            authDomain: "unbanff-project.firebaseapp.com",
+            projectId: "unbanff-project",
+            storageBucket: "unbanff-project.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456:web:abcd"
+        };
+
+        let useCloudDB = false;
+        try {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            var firestore = firebase.firestore();
+            useCloudDB = true;
+        } catch (e) {
+            console.log("Sử dụng LocalStorage dự phòng.");
+        }
+
+        // Tạo hiệu ứng tuyết rơi
+        const snowContainer = document.getElementById('snow-container');
+        for (let i = 0; i < 35; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.top = `${Math.random() * -100}vh`;
+            const size = Math.random() * 6 + 2;
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+            snowflake.style.animationDuration = `${Math.random() * 6 + 4}s`;
+            snowflake.style.animationDelay = `${Math.random() * 5}s`;
+            snowContainer.appendChild(snowflake);
+        }
+
+        // ĐIỀU KHIỂN TRÌNH PHÁT NHẠC
+        let isPlayingMusic = false;
+        const bgMusic = document.getElementById('bgMusic');
+        const discIcon = document.getElementById('discIcon');
+        const musicIconState = document.getElementById('musicIconState');
+
+        function togglePlayMusic() {
+            if (isPlayingMusic) {
+                bgMusic.pause();
+                isPlayingMusic = false;
+                musicIconState.className = "fa-solid fa-play";
+                discIcon.classList.remove('animate-spin-slow');
+            } else {
+                bgMusic.play().then(() => {
+                    isPlayingMusic = true;
+                    musicIconState.className = "fa-solid fa-pause";
+                    discIcon.classList.add('animate-spin-slow');
+                }).catch(err => {
+                    alert("Trình duyệt chặn tự động phát. Hãy bấm nút Play một lần nữa!");
+                });
+            }
+        }
+
+        const defaultDB = {
+            users: [{ username: 'admin', password: '123456', balance: 500000, isAdmin: true }],
+            currentUser: null,
+            products: [
+                { id: 1, name: 'Gói Unban Vĩnh Viễn VIP', price: 1000000, keys: ['KEY-FF-VIP-1111', 'KEY-FF-VIP-2222'] },
+                { id: 2, name: 'Gói Unban 30 Ngày', price: 50000, keys: ['KEY-FF-30D-8888'] }
+            ],
+            userKeys: [], 
+            deposits: [], 
+            bankInfo: { bankName: 'MB Bank', stk: '0123456789', owner: 'NGUYEN VAN A' },
+            telegram: { token: '', chatId: '' }
+        };
+
+        let db = JSON.parse(localStorage.getItem('unbanFF_UltimateDB')) || defaultDB;
+
+        function initDataSync() {
+            if (useCloudDB) {
+                firestore.collection("systemData").doc("mainDB").onSnapshot((doc) => {
+                    if (doc.exists) {
+                        db = doc.data();
+                        renderAll();
+                    } else {
+                        saveDB();
+                    }
+                }, (error) => {
+                    console.log("Lỗi Cloud, dùng LocalStorage.");
+                });
+            } else {
+                renderAll();
+            }
+        }
+
+        function saveDB() {
+            localStorage.setItem('unbanFF_UltimateDB', JSON.stringify(db));
+            if (useCloudDB) {
+                firestore.collection("systemData").doc("mainDB").set(db).catch(err => console.log(err));
+            }
+            renderAll();
+        }
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => alert('Đã sao chép: ' + text));
+        }
+
+        function sendTelegramNotification(message) {
+            if(!db.telegram.token || !db.telegram.chatId) return;
+            const url = `https://api.telegram.org/bot${db.telegram.token}/sendMessage`;
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: db.telegram.chatId, text: message, parse_mode: 'HTML' })
+            }).catch(err => console.log('Telegram Error:', err));
+        }
+
+        let isRegisterMode = false;
+        function openAuthModal() { document.getElementById('authModal').classList.remove('hidden'); }
+        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
+        function toggleMobileMenu() { document.getElementById('mobileDropdownMenu').classList.toggle('hidden'); }
+
+        function toggleAuthMode() {
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('authTitle').innerHTML = isRegisterMode ? '<i class="fa-solid fa-user-plus text-purple-400"></i> Đăng Ký Tài Khoản' : '<i class="fa-solid fa-circle-user text-purple-400"></i> Đăng Nhập Tài Khoản';
+            document.getElementById('authActionBtn').innerHTML = isRegisterMode ? '<i class="fa-solid fa-user-check animate-float"></i> Đăng Ký Ngay' : '<i class="fa-solid fa-arrow-right-to-bracket animate-float"></i> Đăng Nhập';
+            document.getElementById('authSwitchModeBtn').innerText = isRegisterMode ? 'Đã có tài khoản? Đăng nhập' : 'Chưa có tài khoản? Đăng ký ngay';
+        }
+
+        function handleAuth() {
+            const u = document.getElementById('authUsername').value.trim();
+            const p = document.getElementById('authPassword').value.trim();
+            if(!u || !p) { alert('Vui lòng điền đầy đủ thông tin!'); return; }
+
+            if(isRegisterMode) {
+                if(db.users.find(x => x.username === u)) { alert('Tài khoản đã tồn tại!'); return; }
+                db.users.push({ username: u, password: p, balance: 0, isAdmin: false });
+                alert('Đăng ký thành công! Hãy đăng nhập.');
+                toggleAuthMode();
+                saveDB();
+            } else {
+                const user = db.users.find(x => x.username === u && x.password === p);
+                if(!user) { alert('Sai tài khoản hoặc mật khẩu!'); return; }
+                db.currentUser = user.username;
+                closeAuthModal();
+                saveDB();
+                alert('Đăng nhập thành công!');
+            }
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('text-purple-300', 'bg-purple-900/40'));
+            const target = document.querySelector(`.nav-btn[data-target="${tabId}"]`);
+            if(target) target.classList.add('text-purple-300', 'bg-purple-900/40');
+
+            document.querySelectorAll('.nav-btn-mob').forEach(btn => {
+                btn.classList.remove('text-purple-300');
+                btn.classList.add('text-purple-200/70');
+            });
+            const mobTarget = document.querySelector(`.nav-btn-mob[data-target="${tabId}"]`);
+            if(mobTarget) {
+                mobTarget.classList.add('text-purple-300');
+                mobTarget.classList.remove('text-purple-200/70');
+            }
+            renderAll();
+        }
+
+        function buyProduct(prodId) {
+            if(!db.currentUser) { alert('Vui lòng đăng nhập để mua key!'); openAuthModal(); return; }
+            const user = db.users.find(x => x.username === db.currentUser);
+            const prod = db.products.find(x => x.id === prodId);
+
+            if(prod.keys.length === 0) { showFullScreenAlert("Thất bại! Sản phẩm này đã hết key."); return; }
+            if(user.balance < prod.price) { showFullScreenAlert("Thất bại! Số dư tài khoản không đủ."); return; }
+
+            user.balance -= prod.price;
+            const keyItem = prod.keys.shift();
+
+            db.userKeys.push({ username: user.username, productId: prod.id, productName: prod.name, keyStr: keyItem, status: 'Chưa dùng', gameId: '' });
+            saveDB();
+            showFullScreenSuccess(`Mua thành công! Key của bạn: ${keyItem}`);
+        }
+
+        function handleActivateKey() {
+            if(!db.currentUser) { alert('Vui lòng đăng nhập!'); openAuthModal(); return; }
+            const keyStr = document.getElementById('activateKeySelect').value;
+            const gameId = document.getElementById('gameIdInput').value.trim();
+
+            if(!keyStr) { showFullScreenAlert("Thất bại! Chưa chọn key trong kho."); return; }
+            if(!gameId) { showFullScreenAlert("Thất bại! Chưa nhập ID Gem Free Fire."); return; }
+
+            const userKey = db.userKeys.find(x => x.keyStr === keyStr && x.username === db.currentUser);
+            if(!userKey || userKey.status === 'Đã dùng') { showFullScreenAlert("Thất bại! Key không hợp lệ hoặc đã được sử dụng."); return; }
+
+            userKey.status = 'Đã dùng';
+            userKey.gameId = gameId;
+            saveDB();
+
+            sendTelegramNotification(`🚀 <b>YÊU CẦU UNBAN MỚI!</b>\n👤 User: <b>${db.currentUser}</b>\n🎮 ID Game: <b>${gameId}</b>\n🔑 Key: <code>${keyStr}</code>`);
+            showFullScreenSuccess(`Kích hoạt thành công thiết bị ID Gem [${gameId}].`);
+            document.getElementById('gameIdInput').value = '';
+        }
+
+        function requestDeposit() {
+            if(!db.currentUser) { alert('Vui lòng đăng nhập!'); openAuthModal(); return; }
+            const amt = parseInt(document.getElementById('depositAmount').value);
+            if(!amt || amt <= 0) { alert('Số tiền không hợp lệ!'); return; }
+
+            db.deposits.push({ id: Date.now(), username: db.currentUser, type: 'Chuyển Khoản NH', amount: amt, detail: `CK đến ${db.bankInfo.bankName} - STK: ${db.bankInfo.stk}`, status: 'Chờ duyệt', time: new Date().toLocaleString() });
+            saveDB();
+            document.getElementById('depositAmount').value = '';
+
+            sendTelegramNotification(`💰 <b>NẠP TIỀN CHỜ DUYỆT!</b>\n👤 User: <b>${db.currentUser}</b>\n💵 Số tiền: <b>${amt.toLocaleString()} đ</b>`);
+            alert('Gửi yêu cầu thành công! Vui lòng chờ Admin duyệt.');
+            switchTab('profile');
+        }
+
+        function requestCardDeposit() {
+            if(!db.currentUser) { alert('Vui lòng đăng nhập!'); openAuthModal(); return; }
+            const telco = document.getElementById('cardTelco').value;
+            const amt = parseInt(document.getElementById('cardAmount').value);
+            const pin = document.getElementById('cardPin').value.trim();
+            const serial = document.getElementById('cardSerial').value.trim();
+            if(!pin || !serial) { alert('Nhập đầy đủ mã thẻ và seri!'); return; }
+
+            db.deposits.push({ id: Date.now(), username: db.currentUser, type: 'Thẻ Cào', amount: amt, detail: `${telco} - Seri: ${serial} - Pin: ${pin}`, status: 'Chờ duyệt', time: new Date().toLocaleString() });
+            saveDB();
+            document.getElementById('cardPin').value = '';
+            document.getElementById('cardSerial').value = '';
+
+            sendTelegramNotification(`💳 <b>THẺ CÀO CHỜ DUYỆT!</b>\n👤 User: <b>${db.currentUser}</b>\n📡 Mạng: <b>${telco}</b>\n💵 Mệnh giá: <b>${amt.toLocaleString()} đ</b>`);
+            alert('Gửi thẻ cào thành công!');
+            switchTab('profile');
+        }
+
+        function saveAdminTelegram() {
+            db.telegram.token = document.getElementById('telegramTokenInput').value.trim();
+            db.telegram.chatId = document.getElementById('telegramChatIdInput').value.trim();
+            saveDB();
+            alert('Lưu Telegram thành công!');
+        }
+
+        function saveAdminBankInfo() {
+            db.bankInfo.bankName = document.getElementById('adminBankNameInput').value.trim();
+            db.bankInfo.stk = document.getElementById('adminBankStkInput').value.trim();
+            db.bankInfo.owner = document.getElementById('adminBankOwnerInput').value.trim();
+            saveDB();
+            alert('Lưu ngân hàng thành công!');
+        }
+
+        function addProduct() {
+            const name = document.getElementById('newProdName').value.trim();
+            const price = parseInt(document.getElementById('newProdPrice').value);
+            if(!name || isNaN(price)) { alert('Nhập đủ tên và giá!'); return; }
+            db.products.push({ id: Date.now(), name, price, keys: [] });
+            document.getElementById('newProdName').value = '';
+            document.getElementById('newProdPrice').value = '';
+            saveDB();
+            alert('Thêm sản phẩm thành công!');
+        }
+
+        function deleteProduct(id) {
+            if(!confirm('Xóa sản phẩm này?')) return;
+            db.products = db.products.filter(x => x.id !== id);
+            saveDB();
+        }
+
+        function addKeyToProduct(prodId) {
+            const choice = prompt('1. Nhập thủ công (cách nhau dấu phẩy)\n2. Tạo key tự động\nNhập 1 hoặc 2:');
+            if(!choice) return;
+            const prod = db.products.find(x => x.id === prodId);
+            if(choice === '1') {
+                const k = prompt('Nhập key:');
+                if(!k) return;
+                const arr = k.split(',').map(x => x.trim()).filter(x => x);
+                prod.keys.push(...arr);
+            } else if(choice === '2') {
+                const count = parseInt(prompt('Số lượng:', '5')) || 5;
+                for(let i=0; i<count; i++) {
+                    prod.keys.push('FF-VIP-' + Math.random().toString(36).substring(2,8).toUpperCase());
+                }
+            }
+            saveDB();
+        }
+
+        function deleteKeyFromProduct(prodId, idx) {
+            db.products.find(x => x.id === prodId).keys.splice(idx, 1);
+            saveDB();
+        }
+
+        function approveDeposit(id) {
+            const d = db.deposits.find(x => x.id === id);
+            if(d && d.status === 'Chờ duyệt') {
+                d.status = 'Đã duyệt';
+                const u = db.users.find(x => x.username === d.username);
+                if(u) u.balance += d.amount;
+                saveDB();
+            }
+        }
+
+        function approveAllDeposits() {
+            db.deposits.forEach(d => {
+                if(d.status === 'Chờ duyệt') {
+                    d.status = 'Đã duyệt';
+                    const u = db.users.find(x => x.username === d.username);
+                    if(u) u.balance += d.amount;
+                }
+            });
+            saveDB();
+            alert('Đã duyệt tất cả!');
+        }
+
+        function showFullScreenAlert(msg) {
+            document.getElementById('alertMessage').innerText = msg;
+            document.getElementById('fullScreenAlert').classList.remove('hidden');
+        }
+        function closeFullScreenAlert() { document.getElementById('fullScreenAlert').classList.add('hidden'); }
+        function showFullScreenSuccess(msg) {
+            document.getElementById('successMessage').innerText = msg;
+            document.getElementById('fullScreenSuccess').classList.remove('hidden');
+        }
+        function closeSuccessAlert() { document.getElementById('fullScreenSuccess').classList.add('hidden'); }
+
+        function renderAll() {
+            const curr = db.users.find(x => x.username === db.currentUser);
+            const authBtn = document.getElementById('authBtn');
+            const adminShortcut = document.getElementById('adminNavbarShortcut');
+            const adminMob = document.getElementById('adminMobileTabBtn');
+            const adminBanner = document.getElementById('adminBannerShortcut');
+
+            if(curr) {
+                authBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket animate-float"></i> Đăng Xuất';
+                authBtn.onclick = () => { db.currentUser = null; saveDB(); alert('Đã đăng xuất!'); switchTab('shop'); };
+                document.getElementById('userBalanceDisplay').innerText = curr.balance.toLocaleString();
+                if(curr.isAdmin) {
+                    adminShortcut.classList.remove('hidden'); adminShortcut.classList.add('flex');
+                    adminMob.classList.remove('hidden');
+                    adminBanner.classList.remove('hidden');
+                } else {
+                    adminShortcut.classList.add('hidden'); adminShortcut.classList.remove('flex');
+                    adminMob.classList.add('hidden');
+                    adminBanner.classList.add('hidden');
+                }
+            } else {
+                authBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket animate-float"></i> Đăng Nhập';
+                authBtn.onclick = openAuthModal;
+                document.getElementById('userBalanceDisplay').innerText = '0';
+                adminShortcut.classList.add('hidden'); adminShortcut.classList.remove('flex');
+                adminMob.classList.add('hidden');
+                adminBanner.classList.add('hidden');
+            }
+
+            document.getElementById('bankNameDisplay').innerText = db.bankInfo.bankName;
+            document.getElementById('bankStkDisplay').innerText = db.bankInfo.stk;
+            document.getElementById('bankOwnerDisplay').innerText = db.bankInfo.owner;
+            document.getElementById('bankContentDisplay').innerText = 'nap ' + (curr ? curr.username : 'username');
+
+            document.getElementById('telegramTokenInput').value = db.telegram.token || '';
+            document.getElementById('telegramChatIdInput').value = db.telegram.chatId || '';
+            document.getElementById('adminBankNameInput').value = db.bankInfo.bankName || '';
+            document.getElementById('adminBankStkInput').value = db.bankInfo.stk || '';
+            document.getElementById('adminBankOwnerInput').value = db.bankInfo.owner || '';
+
+            document.getElementById('productList').innerHTML = db.products.map(p => `
+                <div class="glass-card p-6 rounded-3xl flex flex-col justify-between shadow-2xl">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="font-extrabold text-lg text-white flex items-center gap-2">
+                                <i class="fa-solid fa-crown text-amber-400 animate-float"></i> ${p.name}
+                            </h3>
+                            <span class="text-xs px-3 py-1 bg-purple-950/80 rounded-full text-purple-300 font-semibold border border-purple-500/30">Kho: ${p.keys.length} key</span>
+                        </div>
+                        <p class="text-3xl font-extrabold text-purple-400 mb-6">${p.price.toLocaleString()} đ</p>
+                    </div>
+                    <button onclick="buyProduct(${p.id})" class="w-full btn-purple text-white font-extrabold py-3.5 rounded-2xl text-sm shadow-lg flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bag-shopping animate-float"></i> Mua Ngay
+                    </button>
+                </div>
+            `).join('') || '<p class="col-span-3 text-center text-purple-300">Chưa có sản phẩm.</p>';
+
+            if(curr) {
+                const myKeys = db.userKeys.filter(x => x.username === curr.username && x.status === 'Chưa dùng');
+                let html = '<option value="">-- Chọn key của bạn --</option>';
+                myKeys.forEach(k => { html += `<option value="${k.keyStr}">${k.productName} - [${k.keyStr}]</option>`; });
+                document.getElementById('activateKeySelect').innerHTML = html;
+
+                document.getElementById('profileUsername').innerText = curr.username;
+                document.getElementById('profileBalance').innerText = curr.balance.toLocaleString() + ' đ';
+
+                document.getElementById('userMyKeysTable').innerHTML = db.userKeys.filter(x => x.username === curr.username).map(k => `
+                    <tr>
+                        <td class="px-5 py-4 font-semibold text-white">${k.productName}</td>
+                        <td class="px-5 py-4 font-mono text-purple-300 font-bold">${k.keyStr}</td>
+                        <td class="px-5 py-4"><span class="px-3 py-1 rounded-full text-xs ${k.status === 'Đã dùng' ? 'bg-purple-950 text-purple-300 border border-purple-500/30 font-semibold' : 'bg-amber-950 text-amber-300 font-semibold'}">${k.status}</span></td>
+                        <td class="px-5 py-4 font-mono text-cyan-300 font-semibold">${k.gameId || 'Chưa unban'}</td>
+                    </tr>
+                `).join('') || '<tr><td colspan="4" class="px-5 py-6 text-center text-purple-300/60">Bạn chưa mua key nào.</td></tr>';
+
+                document.getElementById('userDepositHistoryTable').innerHTML = db.deposits.filter(x => x.username === curr.username).map(d => `
+                    <tr>
+                        <td class="px-5 py-4 font-semibold text-purple-200">${d.type}</td>
+                        <td class="px-5 py-4 font-bold text-amber-300">${d.amount.toLocaleString()} đ</td>
+                        <td class="px-5 py-4 font-mono text-xs text-purple-300/80">${d.detail}</td>
+                        <td class="px-5 py-4"><span class="px-3 py-1 rounded-full text-xs ${d.status === 'Đã duyệt' ? 'bg-purple-950 text-purple-300 border border-purple-500/30 font-semibold' : 'bg-amber-950 text-amber-300 font-semibold'}">${d.status}</span></td>
+                        <td class="px-5 py-4 text-xs text-purple-300/60">${d.time}</td>
+                    </tr>
+                `).join('') || '<tr><td colspan="5" class="px-5 py-6 text-center text-purple-300/60">Chưa có lịch sử nạp tiền.</td></tr>';
+            }
+
+            if(curr && curr.isAdmin) {
+                document.getElementById('statTotalUsers').innerText = db.users.length;
+                document.getElementById('statTotalRevenue').innerText = db.deposits.filter(x => x.status === 'Đã duyệt').reduce((a, b) => a + b.amount, 0).toLocaleString() + ' đ';
+                document.getElementById('statTotalProducts').innerText = db.products.length;
+                document.getElementById('statTotalKeys').innerText = db.products.reduce((a, b) => a + b.keys.length, 0);
+
+                document.getElementById('adminDepositTable').innerHTML = db.deposits.map(d => `
+                    <tr>
+                        <td class="px-4 py-3.5 font-bold text-white">${d.username}</td>
+                        <td class="px-4 py-3.5 text-purple-200">${d.type}</td>
+                        <td class="px-4 py-3.5 text-amber-300 font-extrabold">${d.amount.toLocaleString()} đ</td>
+                        <td class="px-4 py-3.5 font-mono text-xs text-purple-300">${d.detail}</td>
+                        <td class="px-4 py-3.5"><span class="px-3 py-1 rounded-full text-xs ${d.status === 'Đã duyệt' ? 'bg-purple-950 text-purple-300 font-semibold' : 'bg-amber-950 text-amber-300 font-semibold'}">${d.status}</span></td>
+                        <td class="px-4 py-3.5">
+                            ${d.status === 'Chờ duyệt' ? `<button onclick="approveDeposit(${d.id})" class="btn-amber text-slate-950 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-md">Duyệt</button>` : '<span class="text-xs text-purple-400 font-semibold">Đã xong</span>'}
+                        </td>
+                    </tr>
+                `).join('') || '<tr><td colspan="6" class="px-4 py-6 text-center text-purple-300/60">Không có yêu cầu nạp tiền chờ xử lý.</td></tr>';
+
+                document.getElementById('adminProductManageList').innerHTML = db.products.map(p => `
+                    <div class="bg-[#0f0728] p-5 rounded-2xl border border-purple-500/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h4 class="font-extrabold text-white text-base">${p.name} - <span class="text-purple-400">${p.price.toLocaleString()} đ</span></h4>
+                            <p class="text-xs text-purple-300/80 mt-1">Key tồn kho: <span class="text-amber-300 font-extrabold">${p.keys.length}</span></p>
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                ${p.keys.map((k, i) => `
+                                    <span class="bg-purple-950 text-xs px-3 py-1 rounded-xl font-mono text-purple-200 border border-purple-500/30 flex items-center gap-1.5 shadow-sm">
+                                        ${k} <button onclick="deleteKeyFromProduct(${p.id},${i})" class="text-red-400 hover:text-red-300 font-bold ml-1 text-sm">&times;</button>
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="addKeyToProduct(${p.id})" class="btn-purple text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-md">Thêm Key</button>
+                            <button onclick="deleteProduct(${p.id})" class="bg-red-600/80 hover:bg-red-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-md">Xóa</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                document.getElementById('adminAllUsersTable').innerHTML = db.users.map(u => `
+                    <tr>
+                        <td class="px-4 py-3.5 font-bold text-white">${u.username}</td>
+                        <td class="px-4 py-3.5 font-mono text-xs text-purple-300">${u.password}</td>
+                        <td class="px-4 py-3.5"><span class="px-3 py-1 rounded-full text-xs ${u.isAdmin ? 'bg-amber-950 text-amber-300 border border-amber-500/30 font-extrabold' : 'bg-purple-950 text-purple-300'}">${u.isAdmin ? 'Admin' : 'Thành Viên'}</span></td>
+                        <td class="px-4 py-3.5 text-amber-300 font-extrabold">${u.balance.toLocaleString()} đ</td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        window.onload = () => {
+            initDataSync();
+        };
+    </script>
 </body>
 </html>
